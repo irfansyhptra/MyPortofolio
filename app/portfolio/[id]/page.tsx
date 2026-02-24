@@ -9,7 +9,7 @@ import ScrollAnimation from "@/app/components/ScrollAnimation";
 
 // Tipe untuk props halaman, ini adalah praktik yang baik
 type PortfolioDetailPageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 // Fungsi untuk mendapatkan data proyek berdasarkan ID
@@ -24,7 +24,8 @@ async function getProject(id: string): Promise<Project | undefined> {
 export default async function PortfolioDetailPage({
   params,
 }: PortfolioDetailPageProps) {
-  const project = await getProject(params.id);
+  const { id } = await params;
+  const project = await getProject(id);
 
   if (!project) {
     notFound();
