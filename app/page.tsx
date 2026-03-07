@@ -6,9 +6,11 @@ import BlurText from "@/app/components/BlurText";
 import AnimatedContent from "@/app/components/AnimatedContent";
 import FeaturedProjectsSection from "@/app/components/FeaturedProjectsSection";
 import MagicBento from "@/app/components/MagicBento";
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
 import LogoLoop from "@/app/components/LogoLoop";
-import { hero, profile } from "@/app/data/mockData";
+import { hero } from "@/app/data/mockData";
+import GSAPReveal from "@/app/components/GSAPReveal";
+import ParallaxSection from "@/app/components/ParallaxSection";
 
 const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
@@ -29,8 +31,8 @@ export default function Home() {
         {/* Hero Section - Mobile first layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 min-h-screen gap-4 lg:gap-0">
           {/* Text Content */}
-          <div className="col-span-1 lg:col-span-6 order-2 lg:order-1">
-            <div className="flex items-center justify-center lg:justify-start h-full pt-8 pb-12 lg:py-0">
+          <div className="col-span-1 lg:col-span-6 order-1">
+            <div className="flex items-center justify-center lg:justify-start h-full pt-24 pb-12 lg:py-0">
               <div className="flex flex-col gap-3 sm:gap-4 text-center lg:text-left">
                 <AnimatedContent
                   distance={150}
@@ -105,46 +107,56 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* Lanyard 3D - Hidden on small mobile, shown from md */}
-          <div className="col-span-1 lg:col-span-6 order-1 lg:order-2 h-[300px] sm:h-[350px] md:h-[400px] lg:h-full mt-20 lg:mt-0">
-            <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />
+          {/* Lanyard 3D - Desktop only with parallax */}
+          <div className="hidden lg:block col-span-1 lg:col-span-6 order-2 lg:h-full">
+            <ParallaxSection speed={-0.1}>
+              <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />
+            </ParallaxSection>
           </div>
         </div>
       </div>
       
-      {/* Logo Loop Section */}
+      {/* Logo Loop Section — Clip-path reveal */}
       <div>
-        <div style={{ height: '150px', position: 'relative', overflow: 'hidden'}} className="sm:h-[180px] md:h-[200px]">
-          <LogoLoop
-            logos={techLogos}
-            speed={120}
-            direction="left"
-            logoHeight={36}
-            gap={30}
-            pauseOnHover
-            scaleOnHover
-            fadeOut
-            fadeOutColor="#000000"
-            ariaLabel="Technology partners"
+        <GSAPReveal preset="clip-up" duration={1.2} start="top 90%">
+          <div style={{ height: '150px', position: 'relative', overflow: 'hidden'}} className="sm:h-[180px] md:h-[200px]">
+            <LogoLoop
+              logos={techLogos}
+              speed={120}
+              direction="left"
+              logoHeight={36}
+              gap={30}
+              pauseOnHover
+              scaleOnHover
+              fadeOut
+              fadeOutColor="#000000"
+              ariaLabel="Technology partners"
+            />
+          </div>
+        </GSAPReveal>
+        
+        {/* MagicBento Section — Blur-in reveal */}
+        <GSAPReveal preset="blur-in" duration={1.4} delay={0.1}>
+          <MagicBento
+            textAutoHide={true}
+            enableStars={true}
+            enableSpotlight={true}
+            enableBorderGlow={true}
+            enableTilt={false}
+            enableMagnetism={false}
+            clickEffect={true}
+            spotlightRadius={300}
+            particleCount={12}
+            glowColor="132, 0, 255"
           />
-        </div>
+        </GSAPReveal>
         
-        {/* MagicBento Section */}
-        <MagicBento
-          textAutoHide={true}
-          enableStars={true}
-          enableSpotlight={true}
-          enableBorderGlow={true}
-          enableTilt={false}
-          enableMagnetism={false}
-          clickEffect={true}
-          spotlightRadius={300}
-          particleCount={12}
-          glowColor="132, 0, 255"
-        />
-        
-        {/* Featured Projects Section */}
-        <FeaturedProjectsSection />
+        {/* Featured Projects Section — Skew parallax */}
+        <ParallaxSection speed={0.08} className="relative">
+          <GSAPReveal preset="skew-up" duration={1} start="top 80%">
+            <FeaturedProjectsSection />
+          </GSAPReveal>
+        </ParallaxSection>
       </div>
     </div>
   );

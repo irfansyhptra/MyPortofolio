@@ -23,6 +23,7 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ## 🏗️ Arsitektur Website
 
 ### Tech Stack
+
 - **Framework:** Next.js 16 (App Router, Turbopack)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS + custom CSS variables
@@ -32,6 +33,7 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 - **Deployment:** Vercel
 
 ### Struktur Route
+
 ```
 /                → Home (Hero + LogoLoop + MagicBento + Featured Projects)
 /about           → About (Perkenalan + Skills + Pengalaman)
@@ -44,6 +46,7 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ```
 
 ### Sistem Data
+
 - Data disimpan di `app/data/siteData.json` (server-side JSON file)
 - Admin dashboard menggunakan API routes (`/api/admin/*`) untuk CRUD
 - Komponen publik membaca data via server-side read (getServerSideData)
@@ -54,9 +57,11 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ## 📝 Panduan Generate Konten per Section
 
 ### 1. Hero Section (`/` — Home)
+
 **Tujuan:** First impression, menampilkan identitas & value proposition.
 
 **Konten yang diperlukan:**
+
 - `heroTitle`: Greeting singkat (max 8 kata). Contoh: "I'm Ready For Job"
 - `heroName`: Nama lengkap. "I'm Irfan Syahputra"
 - `heroRole`: Role utama. "Full Stack Developer"
@@ -68,9 +73,11 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ---
 
 ### 2. About Page (`/about`)
+
 **Tujuan:** Ceritakan perjalanan profesional, tunjukkan keahlian teknis.
 
 **Konten yang diperlukan:**
+
 - `aboutTitle`: Judul halaman. "Perkenalkan, Saya Developer Web"
 - `aboutDescription`: Paragraf perkenalan (2-3 kalimat).
 - `aboutJourney`: Cerita perjalanan karir (2-3 paragraf, ~150 kata).
@@ -93,9 +100,11 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ---
 
 ### 3. Projects / Portfolio (`/portfolio`)
+
 **Tujuan:** Showcase proyek terbaik, tunjukkan range kemampuan.
 
 **Konten yang diperlukan per proyek:**
+
 ```json
 {
   "id": 1,
@@ -112,6 +121,7 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ```
 
 **Panduan deskripsi proyek:**
+
 1. **Paragraf 1:** Konteks & masalah yang diselesaikan
 2. **Paragraf 2:** Solusi teknis & arsitektur
 3. **Paragraf 3:** Fitur utama & hasil yang dicapai
@@ -121,9 +131,11 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ---
 
 ### 4. Services (`/services`)
+
 **Tujuan:** Jelaskan layanan yang ditawarkan, proses kerja, dan CTA.
 
 **Konten yang diperlukan:**
+
 - `services`: Array layanan.
   ```json
   {
@@ -148,9 +160,11 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ---
 
 ### 5. Blog Posts (`/blog`)
+
 **Tujuan:** Tunjukkan thought leadership, bagikan pengetahuan teknis.
 
 **Konten yang diperlukan per artikel:**
+
 ```json
 {
   "id": 1,
@@ -166,6 +180,7 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ```
 
 **Topik yang relevan:**
+
 - Tutorial framework modern (Next.js, React, Vue)
 - Best practices (clean code, performance, SEO)
 - Case study dari proyek
@@ -174,9 +189,11 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ---
 
 ### 6. Testimonials
+
 **Tujuan:** Social proof dari klien.
 
 **Konten yang diperlukan:**
+
 ```json
 {
   "id": 1,
@@ -194,9 +211,11 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ---
 
 ### 7. Contact Info (`/contact`)
+
 **Tujuan:** Memudahkan calon klien menghubungi.
 
 **Konten yang diperlukan:**
+
 ```json
 {
   "phone": "+62 812 3456 7890",
@@ -215,9 +234,11 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ---
 
 ### 8. Stats
+
 **Tujuan:** Quantify achievements, quick credibility.
 
 **Konten:**
+
 ```json
 [
   { "value": 50, "label": "Projects Completed", "suffix": "+" },
@@ -232,11 +253,13 @@ Bahasa Utama : Bahasa Indonesia (konten), English (technical terms)
 ## 🎨 Design Guidelines
 
 ### Typography
+
 - **Heading:** Poppins Bold/Semibold, size responsive (text-2xl → text-5xl)
 - **Body:** Poppins Regular, text-sm → text-base
 - **Accent text:** Gradient text (gradient-text class)
 
 ### Color Palette
+
 ```
 Primary:      #d10000 (Red)
 Primary Alt:  #ff4500 (Orange-Red)
@@ -248,6 +271,7 @@ Glass:        backdrop-blur + bg-black/80 + border-white/10
 ```
 
 ### Component Patterns
+
 - **Cards:** Rounded-2xl, border-white/[0.08], bg-black/40, backdrop-blur-sm
 - **Badges:** Rounded-full, bg-primary/10, text-primary, border-primary/20
 - **Buttons CTA:** bg-gradient-primary, rounded-xl, hover:shadow glow effect
@@ -255,12 +279,14 @@ Glass:        backdrop-blur + bg-black/80 + border-white/10
 - **Container:** max-w-7xl mx-auto px-4
 
 ### Animation Rules
+
 - **Scroll reveal:** opacity 0→1, y 40→0, stagger 0.1-0.15s
 - **Hover:** scale 1.02, y -10, color transitions
 - **Page transitions:** Framer Motion variants
 - **3D elements:** Three.js only on hero (Lanyard)
 
 ### Responsive Breakpoints
+
 ```
 Mobile:    < 640px  (default / base)
 SM:        640px+   (sm:)
@@ -274,6 +300,7 @@ XL:        1280px+  (xl:)
 ## 🔒 Admin Dashboard
 
 ### Fitur Admin (`/admin`)
+
 1. **Dashboard Overview** — Quick stats, recent activity
 2. **Profile** — Edit nama, role, bio, foto, social links
 3. **Projects** — CRUD proyek, upload gambar, reorder
@@ -287,6 +314,7 @@ XL:        1280px+  (xl:)
 11. **Settings** — Hero content, SEO, general settings
 
 ### Admin Authentication
+
 - Simple password protection (environment variable)
 - Session via localStorage token
 

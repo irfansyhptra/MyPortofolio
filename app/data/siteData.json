@@ -4,7 +4,7 @@
     "role": "Full Stack Developer",
     "bio": "Seorang pengembang web profesional dengan fokus pada teknologi modern untuk menciptakan aplikasi yang cepat, responsif, dan intuitif.",
     "journeyText": "Saya adalah seorang pengembang web dengan spesialisasi dalam membangun aplikasi modern menggunakan React.js, Next.js, dan ekosistem JavaScript. Saya bersemangat dalam mengubah ide-ide kompleks menjadi solusi digital yang elegan dan fungsional.\n\nDengan pengalaman lebih dari 5 tahun di industri teknologi, saya telah mengerjakan berbagai proyek dari website company profile hingga aplikasi web kompleks dengan fitur real-time. Fokus saya adalah memberikan solusi yang tidak hanya terlihat menarik, tetapi juga memiliki performa tinggi dan pengalaman pengguna yang optimal.",
-    "photo": "/assets/6.jpg",
+    "photo": "/assets/6.svg",
     "cv": "/assets/CV_Irfan_Syahputra.pdf",
     "location": "Jakarta, Indonesia",
     "email": "kontak@irfansyahputra.com",
@@ -112,7 +112,7 @@
       "id": 1,
       "title": "Modern Portfolio Website",
       "description": "A personal portfolio website built with Next.js and Three.js, featuring interactive 3D elements and smooth animations. This project showcases modern web development practices and creative design implementation.",
-      "image": "/assets/projects/portfolio.jpg",
+      "image": "/assets/projects/portfolio.svg",
       "link": "https://portfolio.example.com",
       "category": ["Web Development", "3D Graphics"],
       "technologies": ["Next.js", "Three.js", "TailwindCSS", "Framer Motion"],
@@ -122,7 +122,7 @@
       "id": 2,
       "title": "E-Commerce Platform",
       "description": "A full-featured e-commerce platform with real-time inventory management, secure payment processing, and responsive design for optimal user experience across all devices.",
-      "image": "/assets/projects/ecommerce.jpg",
+      "image": "/assets/projects/ecommerce.svg",
       "link": "https://ecommerce.example.com",
       "category": ["Web Development", "E-Commerce"],
       "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
@@ -132,7 +132,7 @@
       "id": 3,
       "title": "AI Dashboard Analytics",
       "description": "An intelligent analytics dashboard powered by machine learning that provides real-time insights, predictive analytics, and automated reporting for data-driven decision making.",
-      "image": "/assets/projects/dashboard.jpg",
+      "image": "/assets/projects/dashboard.svg",
       "link": "https://dashboard.example.com",
       "category": ["Web Development", "AI/ML"],
       "technologies": ["Next.js", "Python", "TensorFlow", "PostgreSQL"],
@@ -145,21 +145,21 @@
       "name": "Sarah Johnson",
       "position": "CEO at TechCorp",
       "quote": "Pengerjaan yang sangat profesional dan hasil yang memuaskan. Komunikasi yang baik selama proses pengembangan.",
-      "avatar": "/assets/testimonials/avatar1.jpg"
+      "avatar": "/assets/testimonials/avatar1.svg"
     },
     {
       "id": 2,
       "name": "David Chen",
       "position": "Product Manager",
       "quote": "Website kami menjadi lebih modern dan performa yang sangat baik. Sangat merekomendasikan jasanya!",
-      "avatar": "/assets/testimonials/avatar2.jpg"
+      "avatar": "/assets/testimonials/avatar2.svg"
     },
     {
       "id": 3,
       "name": "Amanda Torres",
       "position": "Marketing Director",
       "quote": "Hasil pengerjaan sesuai dengan ekspektasi dan tepat waktu. Sangat membantu dalam transformasi digital bisnis kami.",
-      "avatar": "/assets/testimonials/avatar3.jpg"
+      "avatar": "/assets/testimonials/avatar3.svg"
     }
   ],
   "blogPosts": [
@@ -170,7 +170,7 @@
       "content": "Next.js is a powerful framework for building React applications...",
       "date": "2025-09-05",
       "author": "Irfan Syahputra",
-      "image": "/assets/blog/nextjs.jpg",
+      "image": "/assets/blog/nextjs.svg",
       "category": "Web Development"
     }
   ]
