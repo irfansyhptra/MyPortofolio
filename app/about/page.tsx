@@ -2,39 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ScrollAnimation from "@/app/components/ScrollAnimation";
-import GlareHover from "@/app/components/GlareHover"; // Pastikan komponen ini sudah dikonversi
-
-const skills = [
-  { name: "HTML5 & CSS3", level: 95 },
-  { name: "JavaScript (ES6+)", level: 90 },
-  { name: "React.js", level: 92 },
-  { name: "Next.js", level: 85 },
-  { name: "TypeScript", level: 80 },
-  { name: "Tailwind CSS", level: 88 },
-  { name: "Node.js", level: 78 },
-  { name: "MongoDB", level: 70 },
-  { name: "Git & GitHub", level: 85 },
-  { name: "GraphQL", level: 75 },
-  { name: "Redux", level: 82 },
-  { name: "Firebase", level: 70 },
-];
-
-const experiences = [
-  {
-    position: "Senior Frontend Developer",
-    company: "TechSolutions Inc.",
-    period: "2023 - Sekarang",
-    description:
-      "Memimpin tim frontend dalam mengembangkan aplikasi web kompleks, bertanggung jawab atas arsitektur, optimasi performa, dan implementasi fitur baru.",
-  },
-  {
-    position: "Frontend Developer",
-    company: "Digital Agency",
-    period: "2021 - 2023",
-    description:
-      "Mengembangkan website dan aplikasi web untuk berbagai klien, berfokus pada UI/UX, responsivitas, dan pengalaman pengguna.",
-  },
-];
+import GlareHover from "@/app/components/GlareHover";
+import { skills, experiences, profile } from "@/app/data/mockData";
 
 const AboutPage = () => {
   return (
@@ -45,12 +14,10 @@ const AboutPage = () => {
           <div className="text-center mb-10 sm:mb-16">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
               Perkenalkan, Saya{" "}
-              <span className="gradient-text">Developer Web</span>
+              <span className="gradient-text">{profile.role}</span>
             </h1>
             <p className="text-dark-300 max-w-3xl mx-auto text-sm sm:text-base">
-              Seorang pengembang web profesional dengan fokus pada teknologi
-              modern untuk menciptakan aplikasi yang cepat, responsif, dan
-              intuitif.
+              {profile.bio}
             </p>
           </div>
 
@@ -65,8 +32,8 @@ const AboutPage = () => {
                   glareOpacity={0.2}
                 >
                   <Image
-                    src="/assets/6.jpg" // Ganti dengan path gambar Anda
-                    alt="Developer"
+                    src={profile.photo}
+                    alt={profile.name}
                     width={500}
                     height={500}
                     className="w-full h-full object-cover rounded-xl"
@@ -79,15 +46,12 @@ const AboutPage = () => {
                 <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
                   Perjalanan Profesional
                 </h2>
-                <p className="text-dark-300 mb-4 sm:mb-6 text-sm sm:text-base">
-                  Saya adalah seorang pengembang web dengan spesialisasi dalam
-                  membangun aplikasi modern menggunakan React.js, Next.js, dan
-                  ekosistem JavaScript. Saya bersemangat dalam mengubah ide-ide
-                  kompleks menjadi solusi digital yang elegan dan fungsional.
+                <p className="text-dark-300 mb-4 sm:mb-6 text-sm sm:text-base whitespace-pre-line">
+                  {profile.journeyText}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center lg:justify-start">
                   <a
-                    href="/assets/CV_Irfan_Syahputra.pdf" // Ganti dengan path CV Anda
+                    href={profile.cv}
                     download
                     className="px-6 py-2.5 bg-gradient-primary text-white font-medium rounded-md hover:shadow-lg transition duration-300 text-center"
                   >

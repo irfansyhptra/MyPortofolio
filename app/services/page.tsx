@@ -1,40 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { services, Service } from "@/app/data/mockData";
+import { services, Service, workProcess } from "@/app/data/mockData";
 import ScrollAnimation from "@/app/components/ScrollAnimation";
-
-const workProcess = [
-  {
-    step: 1,
-    title: "Discovery & Konsultasi",
-    description:
-      "Memahami kebutuhan, tujuan, dan ekspektasi Anda melalui diskusi mendalam.",
-  },
-  {
-    step: 2,
-    title: "Perencanaan & Desain",
-    description:
-      "Menyusun rencana proyek, membuat wireframe, dan merancang UI/UX yang intuitif.",
-  },
-  {
-    step: 3,
-    title: "Pengembangan",
-    description:
-      "Mengimplementasikan desain menjadi kode dengan teknologi modern dan standar kualitas tinggi.",
-  },
-  {
-    step: 4,
-    title: "Testing & Revisi",
-    description:
-      "Melakukan pengujian komprehensif untuk memastikan semua berfungsi dengan baik dan sesuai.",
-  },
-  {
-    step: 5,
-    title: "Deployment & Support",
-    description:
-      "Meluncurkan proyek dan memberikan dukungan paska-peluncuran untuk pemeliharaan.",
-  },
-];
 
 const ServicesPage = () => {
   return (

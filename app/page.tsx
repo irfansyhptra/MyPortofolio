@@ -8,6 +8,7 @@ import FeaturedProjectsSection from "@/app/components/FeaturedProjectsSection";
 import MagicBento from "@/app/components/MagicBento";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 import LogoLoop from "@/app/components/LogoLoop";
+import { hero, profile } from "@/app/data/mockData";
 
 const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
@@ -45,10 +46,10 @@ export default function Home() {
                 >
                   <div className="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
                     <h1 className="text-white text-lg sm:text-xl md:text-2xl font-bold">
-                      I'am Ready For Job
+                      {hero.greeting}
                     </h1>
                     <RotatingText
-                      texts={["React", "Next.js", "Is", "Cool!"]}
+                      texts={hero.rotatingTexts}
                       mainClassName="px-2 sm:px-2 md:px-3 bg-[#d10000] text-white overflow-hidden py-0.5 sm:py-1 md:py-1 justify-center rounded-lg text-lg sm:text-xl md:text-2xl font-bold inline-flex transition-all"
                       staggerFrom="last"
                       initial={{ y: "100%" }}
@@ -67,7 +68,7 @@ export default function Home() {
                 </AnimatedContent>
                 <div className="flex flex-col items-center lg:items-start">
                   <SplitText
-                    text="I'm Irfan Syahputra"
+                    text={hero.name}
                     className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-center lg:text-start text-white"
                     delay={50}
                     duration={0.6}
@@ -80,7 +81,7 @@ export default function Home() {
                     textAlign="center"
                   />
                   <SplitText
-                    text="Full Stack Developer"
+                    text={hero.role}
                     className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-center lg:text-start text-[#d10000]"
                     delay={100}
                     duration={0.6}
@@ -94,7 +95,7 @@ export default function Home() {
                   />
                 </div>
                 <BlurText
-                  text="Crafting seamless web experiences with React, Node.js, and beyond."
+                  text={hero.description}
                   delay={150}
                   animateBy="words"
                   direction="top"

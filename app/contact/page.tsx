@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import ScrollAnimation from "@/app/components/ScrollAnimation";
-import StarBorder from "@/app/components/StarBorder"; // Impor komponen StarBorder
+import StarBorder from "@/app/components/StarBorder";
+import { profile } from "@/app/data/mockData";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -50,15 +51,41 @@ const ContactPage = () => {
                   {/* Informasi Kontak */}
                   <div>
                     <h3 className="font-medium mb-1 text-sm sm:text-base">Telepon</h3>
-                    <p className="text-dark-300 text-sm sm:text-base">+62 812 3456 7890</p>
+                    <p className="text-dark-300 text-sm sm:text-base">{profile.phone}</p>
                   </div>
                   <div>
                     <h3 className="font-medium mb-1 text-sm sm:text-base">Email</h3>
-                    <p className="text-dark-300 text-sm sm:text-base break-all">kontak@irfansyahputra.com</p>
+                    <p className="text-dark-300 text-sm sm:text-base break-all">{profile.email}</p>
                   </div>
                   <div>
                     <h3 className="font-medium mb-1 text-sm sm:text-base">Lokasi</h3>
-                    <p className="text-dark-300 text-sm sm:text-base">Jakarta, Indonesia</p>
+                    <p className="text-dark-300 text-sm sm:text-base">{profile.location}</p>
+                  </div>
+                  {/* Social Links */}
+                  <div>
+                    <h3 className="font-medium mb-2 text-sm sm:text-base">Sosial Media</h3>
+                    <div className="flex gap-3">
+                      {profile.socialLinks.github && (
+                        <a href={profile.socialLinks.github} target="_blank" rel="noopener noreferrer" className="text-dark-300 hover:text-primary-400 transition-colors text-sm sm:text-base">
+                          GitHub
+                        </a>
+                      )}
+                      {profile.socialLinks.linkedin && (
+                        <a href={profile.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-dark-300 hover:text-primary-400 transition-colors text-sm sm:text-base">
+                          LinkedIn
+                        </a>
+                      )}
+                      {profile.socialLinks.instagram && (
+                        <a href={profile.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-dark-300 hover:text-primary-400 transition-colors text-sm sm:text-base">
+                          Instagram
+                        </a>
+                      )}
+                      {profile.socialLinks.twitter && (
+                        <a href={profile.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-dark-300 hover:text-primary-400 transition-colors text-sm sm:text-base">
+                          Twitter
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

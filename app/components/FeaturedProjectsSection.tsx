@@ -1,95 +1,276 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { projects } from "@/app/data/mockData";
+import { motion, useInView } from "framer-motion";
+import { projects, type Project } from "@/app/data/mockData";
 import ScrollAnimation from "@/app/components/ScrollAnimation";
-import StarBorder from "@/app/components/StarBorder";
 
-const FeaturedProjectsSection = () => {
-  // Ambil 3 proyek pertama dari data untuk ditampilkan sebagai unggulan
-  const featuredProjects = projects.slice(0, 3);
+/* ─────────────────────────────────────────
+   Bento Container – individual grid cell
+   ───────────────────────────────────────── */
+interface BentoContainerProps {
+  project: Project;
+  index: number;
+  variant: "large" | "medium" | "wide";
+}
+
+const BentoContainer: React.FC<BentoContainerProps> = ({
+  project,
+  index,
+  variant,
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  // Description lengths based on variant
+  const descLength = variant === "large" ? 180 : variant === "wide" ? 150 : 100;
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 px-4 bg-dark-950">
-      <div className="container mx-auto">
+    <motion.div
+      ref={containerRef}
+      className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-black/40 backdrop-blur-sm cursor-pointer h-full"
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+      whileHover={{ scale: 1.02 }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Spotlight glow that follows cursor */}
+      <div
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(209,0,0,0.12), transparent 40%)`,
+        }}
+      />
+
+      {/* Animated border glow on hover */}
+      <div
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(209,0,0,0.25), transparent 40%)`,
+          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          maskComposite: "exclude",
+          WebkitMaskComposite: "xor",
+          padding: "1px",
+        }}
+      />
+
+      {/* Background image with overlay */}
+      <div className="absolute inset-0">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          sizes={
+            variant === "large"
+              ? "(max-width: 768px) 100vw, 50vw"
+              : "(max-width: 768px) 100vw, 33vw"
+          }
+        />
+        {/* Multi-layer gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+        {/* Extra darken on hover for readability */}
+        <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/20" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex h-full flex-col justify-between p-5 sm:p-6 lg:p-8">
+        {/* Top: Categories & Tech */}
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {project.category.map((cat) => (
+              <span
+                key={cat}
+                className="rounded-full bg-white/10 px-2.5 py-1 text-[10px] sm:text-xs font-medium text-white/80 backdrop-blur-sm border border-white/[0.06] transition-colors duration-300 group-hover:bg-primary/20 group-hover:text-white group-hover:border-primary/30"
+              >
+                {cat}
+              </span>
+            ))}
+          </div>
+          {/* Arrow icon */}
+          <motion.div
+            className="flex-shrink-0 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white/10 text-white/60 backdrop-blur-sm border border-white/[0.08] transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:border-primary/50"
+            whileHover={{ rotate: -45 }}
+          >
+            <svg
+              className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+          </motion.div>
+        </div>
+
+        {/* Bottom: Title, Description, Tech Stack */}
+        <div className="mt-auto">
+          {/* Tech stack pills */}
+          <div className="mb-3 flex flex-wrap gap-1.5 opacity-0 translate-y-3 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+            {project.technologies.slice(0, variant === "large" ? 4 : 3).map((tech) => (
+              <span
+                key={tech}
+                className="rounded-md bg-primary/10 px-2 py-0.5 text-[10px] sm:text-xs font-mono text-primary/90 border border-primary/20"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <h3
+            className={`font-bold text-white mb-2 leading-tight transition-colors duration-300 group-hover:text-white ${
+              variant === "large"
+                ? "text-xl sm:text-2xl lg:text-3xl"
+                : variant === "wide"
+                ? "text-lg sm:text-xl lg:text-2xl"
+                : "text-base sm:text-lg lg:text-xl"
+            }`}
+          >
+            {project.title}
+          </h3>
+          <p
+            className={`text-white/50 leading-relaxed transition-colors duration-300 group-hover:text-white/70 ${
+              variant === "large" ? "text-sm sm:text-base" : "text-xs sm:text-sm"
+            }`}
+          >
+            {project.description.substring(0, descLength)}...
+          </p>
+
+          {/* "Lihat Detail" link – slides up on hover */}
+          <Link
+            href={`/portfolio/${project.id}`}
+            className="mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 hover:gap-3"
+          >
+            Lihat Detail
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+
+      {/* Subtle noise texture overlay */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-[0.03]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }} />
+    </motion.div>
+  );
+};
+
+/* ─────────────────────────────────────────
+   Main Section
+   ───────────────────────────────────────── */
+const FeaturedProjectsSection = () => {
+  const featuredProjects = projects.slice(0, 3);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  return (
+    <section ref={sectionRef} className="py-16 sm:py-20 lg:py-28 px-4">
+      <div className="container mx-auto max-w-7xl">
+        {/* Section Header */}
         <ScrollAnimation>
-          <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-            <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-dark-800 text-primary-400 rounded-full text-xs sm:text-sm font-medium inline-block mb-3 sm:mb-4">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <motion.span
+              className="px-4 py-1.5 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-medium inline-block mb-4 border border-primary/20"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.5 }}
+            >
               Portofolio
-            </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
+            </motion.span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
               Proyek <span className="gradient-text">Unggulan</span>
             </h2>
-            <p className="text-dark-300 max-w-2xl mx-auto text-sm sm:text-base">
+            <p className="text-white/40 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
               Beberapa proyek terbaik yang telah saya kerjakan untuk klien dari
               berbagai industri.
             </p>
           </div>
         </ScrollAnimation>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {featuredProjects.map((project, index) => (
-            <ScrollAnimation key={project.id} delay={index * 0.1}>
-              <StarBorder as="div" color="#d10000" speed="5s">
-                <motion.div
-                  className="overflow-hidden h-full flex flex-col bg-dark-800 rounded-lg"
-                  whileHover={{ y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {/* Bagian Gambar Proyek */}
-                  <div className="relative overflow-hidden h-48 sm:h-52 lg:h-60">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      layout="fill"
-                      objectFit="cover"
-                      className="transition-transform duration-500 hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                    <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 flex flex-wrap gap-1.5 sm:gap-2">
-                      {project.category.slice(0, 2).map((cat) => (
-                        <span
-                          key={cat}
-                          className="px-2 sm:px-3 py-0.5 sm:py-1 bg-dark-800 bg-opacity-80 text-primary-400 rounded-full text-[10px] sm:text-xs font-medium"
-                        >
-                          {cat}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  {/* Bagian Deskripsi Proyek */}
-                  <div className="p-4 sm:p-5 lg:p-6 flex flex-col flex-grow">
-                    <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
-                      {project.title}
-                    </h3>
-                    <p className="text-dark-300 mb-3 sm:mb-4 flex-grow text-xs sm:text-sm">
-                      {project.description.substring(0, 120)}...
-                    </p>
-                    <Link
-                      href={`/portfolio/${project.id}`}
-                      className="text-primary-400 hover:text-primary-300 mt-auto font-semibold text-sm sm:text-base"
-                    >
-                      Lihat Detail →
-                    </Link>
-                  </div>
-                </motion.div>
-              </StarBorder>
-            </ScrollAnimation>
-          ))}
+        {/* ── Bento Grid ── */}
+        {/* Desktop: asymmetric 2-column layout
+            Row 1: Large (spans 7 cols) + Medium (spans 5 cols)
+            Row 2: Wide (spans full 12 cols)
+            Mobile: stacked single column */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 lg:gap-5 auto-rows-[minmax(280px,1fr)] md:auto-rows-[minmax(320px,1fr)] lg:auto-rows-[minmax(380px,1fr)]">
+          {/* Cell 1: Large – spans 7 columns */}
+          {featuredProjects[0] && (
+            <div className="md:col-span-7 min-h-[320px] sm:min-h-[360px] lg:min-h-[420px]">
+              <BentoContainer
+                project={featuredProjects[0]}
+                index={0}
+                variant="large"
+              />
+            </div>
+          )}
+
+          {/* Cell 2: Medium – spans 5 columns */}
+          {featuredProjects[1] && (
+            <div className="md:col-span-5 min-h-[280px] sm:min-h-[320px] lg:min-h-[420px]">
+              <BentoContainer
+                project={featuredProjects[1]}
+                index={1}
+                variant="medium"
+              />
+            </div>
+          )}
+
+          {/* Cell 3: Wide – spans full width */}
+          {featuredProjects[2] && (
+            <div className="md:col-span-12 min-h-[280px] sm:min-h-[300px] lg:min-h-[340px]">
+              <BentoContainer
+                project={featuredProjects[2]}
+                index={2}
+                variant="wide"
+              />
+            </div>
+          )}
         </div>
 
-        {/* Tombol untuk melihat semua proyek */}
-        <div className="text-center mt-10 sm:mt-12 lg:mt-16">
+        {/* CTA Button */}
+        <motion.div
+          className="text-center mt-12 sm:mt-16 lg:mt-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
           <Link
             href="/portfolio"
-            className="px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-primary text-white font-medium rounded-md hover:shadow-lg transition duration-300 inline-block text-sm sm:text-base"
+            className="group relative inline-flex items-center gap-2 px-8 py-3 sm:px-10 sm:py-4 bg-gradient-primary text-white font-medium rounded-xl hover:shadow-[0_0_30px_rgba(209,0,0,0.3)] transition-all duration-300 text-sm sm:text-base overflow-hidden"
           >
-            Lihat Semua Proyek
+            <span className="relative z-10">Lihat Semua Proyek</span>
+            <svg
+              className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+            {/* Shimmer effect */}
+            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,0 +1,177 @@
+{
+  "profile": {
+    "name": "Irfan Syahputra",
+    "role": "Full Stack Developer",
+    "bio": "Seorang pengembang web profesional dengan fokus pada teknologi modern untuk menciptakan aplikasi yang cepat, responsif, dan intuitif.",
+    "journeyText": "Saya adalah seorang pengembang web dengan spesialisasi dalam membangun aplikasi modern menggunakan React.js, Next.js, dan ekosistem JavaScript. Saya bersemangat dalam mengubah ide-ide kompleks menjadi solusi digital yang elegan dan fungsional.\n\nDengan pengalaman lebih dari 5 tahun di industri teknologi, saya telah mengerjakan berbagai proyek dari website company profile hingga aplikasi web kompleks dengan fitur real-time. Fokus saya adalah memberikan solusi yang tidak hanya terlihat menarik, tetapi juga memiliki performa tinggi dan pengalaman pengguna yang optimal.",
+    "photo": "/assets/6.jpg",
+    "cv": "/assets/CV_Irfan_Syahputra.pdf",
+    "location": "Jakarta, Indonesia",
+    "email": "kontak@irfansyahputra.com",
+    "phone": "+62 812 3456 7890",
+    "availability": "Tersedia untuk proyek freelance & full-time",
+    "socialLinks": {
+      "github": "https://github.com/irfansyhptra",
+      "linkedin": "https://linkedin.com/in/irfansyahputra",
+      "instagram": "",
+      "twitter": ""
+    }
+  },
+  "hero": {
+    "greeting": "I'm Ready For Job",
+    "name": "I'm Irfan Syahputra",
+    "role": "Full Stack Developer",
+    "description": "Crafting seamless web experiences with React, Node.js, and beyond.",
+    "rotatingTexts": ["React", "Next.js", "Is", "Cool!"]
+  },
+  "stats": [
+    { "value": 50, "label": "Projects Completed", "suffix": "+" },
+    { "value": 95, "label": "Client Satisfaction", "suffix": "%" },
+    { "value": 5, "label": "Years Experience", "suffix": "+" },
+    { "value": 100, "label": "Code Reviews", "suffix": "+" }
+  ],
+  "skills": [
+    { "name": "HTML5 & CSS3", "level": 95, "category": "Frontend" },
+    { "name": "JavaScript (ES6+)", "level": 90, "category": "Frontend" },
+    { "name": "React.js", "level": 92, "category": "Frontend" },
+    { "name": "Next.js", "level": 85, "category": "Frontend" },
+    { "name": "TypeScript", "level": 80, "category": "Frontend" },
+    { "name": "Tailwind CSS", "level": 88, "category": "Frontend" },
+    { "name": "Node.js", "level": 78, "category": "Backend" },
+    { "name": "MongoDB", "level": 70, "category": "Backend" },
+    { "name": "Git & GitHub", "level": 85, "category": "Tools" },
+    { "name": "GraphQL", "level": 75, "category": "Backend" },
+    { "name": "Redux", "level": 82, "category": "Frontend" },
+    { "name": "Firebase", "level": 70, "category": "Backend" }
+  ],
+  "experiences": [
+    {
+      "id": 1,
+      "position": "Senior Frontend Developer",
+      "company": "TechSolutions Inc.",
+      "period": "2023 - Sekarang",
+      "description": "Memimpin tim frontend dalam mengembangkan aplikasi web kompleks, bertanggung jawab atas arsitektur, optimasi performa, dan implementasi fitur baru."
+    },
+    {
+      "id": 2,
+      "position": "Frontend Developer",
+      "company": "Digital Agency",
+      "period": "2021 - 2023",
+      "description": "Mengembangkan website dan aplikasi web untuk berbagai klien, berfokus pada UI/UX, responsivitas, dan pengalaman pengguna."
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "title": "Web Development",
+      "description": "Membuat website modern dan responsif dengan teknologi terkini untuk meningkatkan presence digital bisnis Anda.",
+      "icon": "💻"
+    },
+    {
+      "id": 2,
+      "title": "Frontend Development",
+      "description": "Membangun antarmuka pengguna yang menarik dan interaktif dengan fokus pada pengalaman pengguna yang optimal.",
+      "icon": "🎨"
+    },
+    {
+      "id": 3,
+      "title": "Backend Development",
+      "description": "Mengembangkan sistem backend yang handal dan scalable untuk mendukung aplikasi web Anda.",
+      "icon": "⚙️"
+    }
+  ],
+  "workProcess": [
+    {
+      "step": 1,
+      "title": "Discovery & Konsultasi",
+      "description": "Memahami kebutuhan, tujuan, dan ekspektasi Anda melalui diskusi mendalam."
+    },
+    {
+      "step": 2,
+      "title": "Perencanaan & Desain",
+      "description": "Menyusun rencana proyek, membuat wireframe, dan merancang UI/UX yang intuitif."
+    },
+    {
+      "step": 3,
+      "title": "Pengembangan",
+      "description": "Mengimplementasikan desain menjadi kode dengan teknologi modern dan standar kualitas tinggi."
+    },
+    {
+      "step": 4,
+      "title": "Testing & Revisi",
+      "description": "Melakukan pengujian komprehensif untuk memastikan semua berfungsi dengan baik dan sesuai."
+    },
+    {
+      "step": 5,
+      "title": "Deployment & Support",
+      "description": "Meluncurkan proyek dan memberikan dukungan paska-peluncuran untuk pemeliharaan."
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Modern Portfolio Website",
+      "description": "A personal portfolio website built with Next.js and Three.js, featuring interactive 3D elements and smooth animations. This project showcases modern web development practices and creative design implementation.",
+      "image": "/assets/projects/portfolio.jpg",
+      "link": "https://portfolio.example.com",
+      "category": ["Web Development", "3D Graphics"],
+      "technologies": ["Next.js", "Three.js", "TailwindCSS", "Framer Motion"],
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "E-Commerce Platform",
+      "description": "A full-featured e-commerce platform with real-time inventory management, secure payment processing, and responsive design for optimal user experience across all devices.",
+      "image": "/assets/projects/ecommerce.jpg",
+      "link": "https://ecommerce.example.com",
+      "category": ["Web Development", "E-Commerce"],
+      "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
+      "featured": true
+    },
+    {
+      "id": 3,
+      "title": "AI Dashboard Analytics",
+      "description": "An intelligent analytics dashboard powered by machine learning that provides real-time insights, predictive analytics, and automated reporting for data-driven decision making.",
+      "image": "/assets/projects/dashboard.jpg",
+      "link": "https://dashboard.example.com",
+      "category": ["Web Development", "AI/ML"],
+      "technologies": ["Next.js", "Python", "TensorFlow", "PostgreSQL"],
+      "featured": true
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Sarah Johnson",
+      "position": "CEO at TechCorp",
+      "quote": "Pengerjaan yang sangat profesional dan hasil yang memuaskan. Komunikasi yang baik selama proses pengembangan.",
+      "avatar": "/assets/testimonials/avatar1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "David Chen",
+      "position": "Product Manager",
+      "quote": "Website kami menjadi lebih modern dan performa yang sangat baik. Sangat merekomendasikan jasanya!",
+      "avatar": "/assets/testimonials/avatar2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Amanda Torres",
+      "position": "Marketing Director",
+      "quote": "Hasil pengerjaan sesuai dengan ekspektasi dan tepat waktu. Sangat membantu dalam transformasi digital bisnis kami.",
+      "avatar": "/assets/testimonials/avatar3.jpg"
+    }
+  ],
+  "blogPosts": [
+    {
+      "id": 1,
+      "title": "Getting Started with Next.js",
+      "excerpt": "Learn how to build modern web applications with Next.js",
+      "content": "Next.js is a powerful framework for building React applications...",
+      "date": "2025-09-05",
+      "author": "Irfan Syahputra",
+      "image": "/assets/blog/nextjs.jpg",
+      "category": "Web Development"
+    }
+  ]
+}
