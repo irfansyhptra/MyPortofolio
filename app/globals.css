@@ -21,6 +21,56 @@
   --primary-gradient: linear-gradient(135deg, #d10000 0%, #ff4500 100%);
   --bg-primary: #000000;
   --text-primary: #f3f4f6;
+
+  /* Neumorphism Design Tokens */
+  --neuro-light-source-angle: 145deg;
+  --neuro-shadow-blur-min: 10px;
+  --neuro-shadow-blur-max: 30px;
+  --neuro-shadow-spread-min: -5px;
+  --neuro-shadow-spread-max: 5px;
+  --neuro-shadow-opacity: 0.15;
+  --neuro-highlight-opacity: 0.1;
+  --neuro-transition-hover: 200ms;
+  --neuro-transition-active: 100ms;
+  
+  /* Glassmorphism Design Tokens */
+  --glass-bg-opacity-min: 0.05;
+  --glass-bg-opacity-max: 0.3;
+  --glass-blur-min: 8px;
+  --glass-blur-max: 24px;
+  --glass-border-opacity: 0.2;
+  --glass-shadow-blur: 30px;
+  
+  /* Responsive Breakpoints */
+  --breakpoint-mobile: 768px;
+  --breakpoint-tablet: 1024px;
+  
+  /* Spacing Scale (0-96px in 4px increments) */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  
+  /* Blur Radius Values */
+  --blur-0: 0;
+  --blur-1: 4px;
+  --blur-2: 8px;
+  --blur-3: 12px;
+  --blur-4: 16px;
+  --blur-5: 20px;
+  --blur-6: 24px;
+
+  /* Shadow Levels */
+  --shadow-0: none;
+  --shadow-1: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-2: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-3: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 body {
