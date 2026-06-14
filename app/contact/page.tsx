@@ -1,11 +1,12 @@
 "use client";
-
 import React, { useState } from "react";
-import StarBorder from "@/app/components/StarBorder";
-import GSAPReveal from "@/app/components/GSAPReveal";
-import { profile } from "@/app/data/mockData";
+import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiInstagram, FiTwitter } from "react-icons/fi";
+import { useData } from "@/app/components/DataContext";
+import SplitText from "@/app/components/SplitText";
 
-const ContactPage = () => {
+export default function ContactPage() {
+  const { data } = useData();
+  const { profile } = data;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,141 +28,214 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="pt-20 sm:pt-24">
-      <section className="py-12 sm:py-16 px-4 bg-dark-900">
-        <div className="container mx-auto">
-          {/* Title — Clip circle */}
-          <GSAPReveal preset="clip-circle" duration={1.2}>
-            <div className="text-center mb-10 sm:mb-16">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
-                Hubungi <span className="gradient-text">Saya</span>
-              </h1>
-              <p className="text-dark-300 max-w-3xl mx-auto text-sm sm:text-base">
-                Ada pertanyaan atau ingin mendiskusikan proyek? Jangan ragu untuk
-                menghubungi saya.
-              </p>
-            </div>
-          </GSAPReveal>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
-            {/* Contact info — Fade left with stagger */}
-            <GSAPReveal preset="fade-left" duration={1}>
-              <div className="card p-6 sm:p-8">
-                <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
-                  Informasi Kontak
-                </h2>
-                <div className="space-y-4 sm:space-y-6">
-                  <div>
-                    <h3 className="font-medium mb-1 text-sm sm:text-base">Telepon</h3>
-                    <p className="text-dark-300 text-sm sm:text-base">{profile.phone}</p>
-                  </div>
-                  <div>
-                    <h3 className="font-medium mb-1 text-sm sm:text-base">Email</h3>
-                    <p className="text-dark-300 text-sm sm:text-base break-all">{profile.email}</p>
-                  </div>
-                  <div>
-                    <h3 className="font-medium mb-1 text-sm sm:text-base">Lokasi</h3>
-                    <p className="text-dark-300 text-sm sm:text-base">{profile.location}</p>
-                  </div>
-                  <div>
-                    <h3 className="font-medium mb-2 text-sm sm:text-base">Sosial Media</h3>
-                    <div className="flex gap-3">
-                      {profile.socialLinks.github && (
-                        <a href={profile.socialLinks.github} target="_blank" rel="noopener noreferrer" className="text-dark-300 hover:text-primary-400 transition-colors text-sm sm:text-base">
-                          GitHub
-                        </a>
-                      )}
-                      {profile.socialLinks.linkedin && (
-                        <a href={profile.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-dark-300 hover:text-primary-400 transition-colors text-sm sm:text-base">
-                          LinkedIn
-                        </a>
-                      )}
-                      {profile.socialLinks.instagram && (
-                        <a href={profile.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-dark-300 hover:text-primary-400 transition-colors text-sm sm:text-base">
-                          Instagram
-                        </a>
-                      )}
-                      {profile.socialLinks.twitter && (
-                        <a href={profile.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-dark-300 hover:text-primary-400 transition-colors text-sm sm:text-base">
-                          Twitter
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </GSAPReveal>
-
-            {/* Contact form — Fade right, form fields stagger */}
-            <GSAPReveal preset="fade-right" duration={1} delay={0.15}>
-              <div className="card p-6 sm:p-8">
-                <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Kirim Pesan</h2>
-                <GSAPReveal preset="fade-up" stagger={0.1} duration={0.6} className="" start="top 95%">
-                  <form onSubmit={handleSubmit}>
-                    <div className="mb-4 sm:mb-6">
-                      <label htmlFor="name" className="block text-dark-300 mb-2 text-sm sm:text-base">
-                        Nama
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-dark-800 border border-dark-700 rounded-md focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary/30 text-white text-sm sm:text-base transition-all duration-300"
-                        required
-                      />
-                    </div>
-                    <div className="mb-4 sm:mb-6">
-                      <label htmlFor="email" className="block text-dark-300 mb-2 text-sm sm:text-base">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-dark-800 border border-dark-700 rounded-md focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary/30 text-white text-sm sm:text-base transition-all duration-300"
-                        required
-                      />
-                    </div>
-                    <div className="mb-4 sm:mb-6">
-                      <label htmlFor="subject" className="block text-dark-300 mb-2 text-sm sm:text-base">
-                        Subjek
-                      </label>
-                      <input
-                        type="text"
-                        id="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-dark-800 border border-dark-700 rounded-md focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary/30 text-white text-sm sm:text-base transition-all duration-300"
-                        required
-                      />
-                    </div>
-                    <div className="mb-4 sm:mb-6">
-                      <label htmlFor="message" className="block text-dark-300 mb-2 text-sm sm:text-base">
-                        Pesan
-                      </label>
-                      <textarea
-                        id="message"
-                        rows={4}
-                        value={formData.message}
-                        onChange={handleChange}
-                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-dark-800 border border-dark-700 rounded-md focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary/30 text-white resize-none text-sm sm:text-base transition-all duration-300"
-                        required
-                      ></textarea>
-                    </div>
-                    <StarBorder type="submit" className="w-full">
-                      Kirim Pesan
-                    </StarBorder>
-                  </form>
-                </GSAPReveal>
-              </div>
-            </GSAPReveal>
+    <div className="w-full min-h-screen py-6 md:py-8 px-4 sm:px-6 md:px-8 lg:px-10 flex flex-col gap-4 sm:gap-5">
+      
+      {/* Bento Layout Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+        
+        {/* Header Box (Full width / spans 2 columns on desktop) */}
+        <div className="lg:col-span-2 card-minimal p-8 sm:p-12">
+          <div>
+            <span className="text-xs font-mono uppercase tracking-wider text-charcoal-muted block mb-3">
+              Hubungi Saya
+            </span>
+            <SplitText
+              text="Mari Bekerja Sama"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-1.5px] text-charcoal leading-none mb-6"
+              delay={35}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 30 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              textAlign="left"
+            />
+            <p className="text-charcoal-muted text-sm sm:text-base max-w-2xl leading-relaxed">
+              Punya proyek menarik, lowongan pekerjaan, atau sekadar ingin berdiskusi? Jangan ragu untuk mengirim pesan di bawah ini.
+            </p>
           </div>
         </div>
-      </section>
+
+        {/* Box 1: Contact Info */}
+        <div className="card-minimal p-8 sm:p-10 flex flex-col justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-charcoal mb-8 border-b border-cream-border pb-4">
+              Informasi Kontak
+            </h2>
+            
+            <div className="space-y-6">
+              {/* Telepon */}
+              <div className="flex gap-4 items-start">
+                <div className="p-3 bg-cream rounded-lg border border-cream-border text-charcoal">
+                  <FiPhone size={20} />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-charcoal-muted font-mono">
+                    Telepon
+                  </h3>
+                  <p className="text-charcoal text-sm sm:text-base mt-1 font-medium">
+                    {profile.phone}
+                  </p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex gap-4 items-start">
+                <div className="p-3 bg-cream rounded-lg border border-cream-border text-charcoal">
+                  <FiMail size={20} />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-charcoal-muted font-mono">
+                    Email
+                  </h3>
+                  <p className="text-charcoal text-sm sm:text-base mt-1 font-medium break-all">
+                    {profile.email}
+                  </p>
+                </div>
+              </div>
+
+              {/* Lokasi */}
+              <div className="flex gap-4 items-start">
+                <div className="p-3 bg-cream rounded-lg border border-cream-border text-charcoal">
+                  <FiMapPin size={20} />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-charcoal-muted font-mono">
+                    Lokasi
+                  </h3>
+                  <p className="text-charcoal text-sm sm:text-base mt-1 font-medium">
+                    {profile.location}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Socials */}
+          <div className="mt-12 pt-6 border-t border-cream-border">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-charcoal-muted font-mono mb-4">
+              Sosial Media
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {profile.socialLinks.github && (
+                <a
+                  href={profile.socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost text-xs px-3.5 py-1.5 inline-flex items-center gap-1.5"
+                >
+                  <FiGithub /> GitHub
+                </a>
+              )}
+              {profile.socialLinks.linkedin && (
+                <a
+                  href={profile.socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost text-xs px-3.5 py-1.5 inline-flex items-center gap-1.5"
+                >
+                  <FiLinkedin /> LinkedIn
+                </a>
+              )}
+              {profile.socialLinks.instagram && (
+                <a
+                  href={profile.socialLinks.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost text-xs px-3.5 py-1.5 inline-flex items-center gap-1.5"
+                >
+                  <FiInstagram /> Instagram
+                </a>
+              )}
+              {profile.socialLinks.twitter && (
+                <a
+                  href={profile.socialLinks.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost text-xs px-3.5 py-1.5 inline-flex items-center gap-1.5"
+                >
+                  <FiTwitter /> Twitter
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Box 2: Form */}
+        <div className="card-minimal p-8 sm:p-10">
+          <h2 className="text-xl font-bold text-charcoal mb-8 border-b border-cream-border pb-4">
+            Kirim Pesan
+          </h2>
+          
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-charcoal-muted font-mono mb-2">
+                Nama Lengkap
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-cream border border-cream-border rounded-lg text-charcoal text-sm focus:outline-none focus:border-charcoal-border focus:ring-1 focus:ring-charcoal/10 transition-colors duration-200 font-sans"
+                placeholder="Masukkan nama Anda"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-charcoal-muted font-mono mb-2">
+                Alamat Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-cream border border-cream-border rounded-lg text-charcoal text-sm focus:outline-none focus:border-charcoal-border focus:ring-1 focus:ring-charcoal/10 transition-colors duration-200 font-sans"
+                placeholder="email@contoh.com"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="subject" className="block text-xs font-bold uppercase tracking-wider text-charcoal-muted font-mono mb-2">
+                Subjek
+              </label>
+              <input
+                type="text"
+                id="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-cream border border-cream-border rounded-lg text-charcoal text-sm focus:outline-none focus:border-charcoal-border focus:ring-1 focus:ring-charcoal/10 transition-colors duration-200 font-sans"
+                placeholder="Judul pesan"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-charcoal-muted font-mono mb-2">
+                Pesan
+              </label>
+              <textarea
+                id="message"
+                rows={5}
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-cream border border-cream-border rounded-lg text-charcoal text-sm focus:outline-none focus:border-charcoal-border focus:ring-1 focus:ring-charcoal/10 transition-colors duration-200 resize-none font-sans"
+                placeholder="Tulis pesan Anda di sini..."
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" className="btn-primary-dark w-full py-3 mt-4 flex items-center justify-center gap-2">
+              Kirim Pesan <FiSend />
+            </button>
+          </form>
+        </div>
+
+      </div>
     </div>
   );
-};
-
-export default ContactPage;
+}

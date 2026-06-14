@@ -179,7 +179,7 @@ export const NeumorphicButton = forwardRef<HTMLButtonElement, NeumorphicButtonPr
         className={className}
         disabled={disabled}
         {...motionProps}
-        {...props}
+        {...props as any}
       >
         {children}
       </motion.button>

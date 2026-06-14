@@ -178,14 +178,14 @@ export function NeumorphicCard({
       scale: 1.02,
       transition: {
         duration: transition.hover / 1000, // Convert ms to seconds
-        ease: [0.4, 0, 0.2, 1], // Custom easing curve
+        ease: [0.4, 0, 0.2, 1] as const, // Custom easing curve
       },
     },
     tap: {
       scale: 0.98,
       transition: {
         duration: transition.active / 1000, // Convert ms to seconds
-        ease: [0.4, 0, 0.2, 1],
+        ease: [0.4, 0, 0.2, 1] as const,
       },
     },
   } : undefined;
@@ -201,7 +201,7 @@ export function NeumorphicCard({
       variants={animationVariants}
       whileHover={shouldEnableHover ? 'hover' : undefined}
       whileTap={interactive && !prefersReducedMotion ? 'tap' : undefined}
-      {...props}
+      {...props as any}
     >
       {children}
     </motion.div>

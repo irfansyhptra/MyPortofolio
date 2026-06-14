@@ -171,7 +171,7 @@ export function GlassCard({
       style={glassStyles}
       className={className}
       {...animationVariants}
-      {...props}
+      {...props as any}
     >
       {children}
     </motion.div>

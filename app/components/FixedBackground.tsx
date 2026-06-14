@@ -1,29 +1,18 @@
 "use client";
 
-import FloatingLines from './FloatingLines';
+import React from "react";
 
 export default function FixedBackground() {
   return (
     <div 
+      className="fixed inset-0 z-0 pointer-events-none bg-cream"
       style={{ 
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw', 
-        height: '100vh', 
-        zIndex: 0,
-        pointerEvents: 'none',
+        backgroundImage: `
+          linear-gradient(to right, rgba(28, 28, 28, 0.03) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(28, 28, 28, 0.03) 1px, transparent 1px)
+        `,
+        backgroundSize: '64px 64px',
       }}
-    >
-      <FloatingLines 
-        enabledWaves={["top", "middle", "bottom"]}
-        lineCount={5}
-        lineDistance={5}
-        bendRadius={5}
-        bendStrength={-0.5}
-        interactive={false}
-        parallax={true}
-      />
-    </div>
+    />
   );
 }

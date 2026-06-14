@@ -101,7 +101,7 @@ export function GlassPanel({
       style={panelStyles}
       className={className}
       {...animationVariants}
-      {...props}
+      {...props as any}
     >
       {children}
     </motion.div>

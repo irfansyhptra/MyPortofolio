@@ -1,102 +1,113 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
-import { services, Service, workProcess } from "@/app/data/mockData";
-import GSAPReveal from "@/app/components/GSAPReveal";
-import ParallaxSection from "@/app/components/ParallaxSection";
+import { FiLayers, FiCheckCircle, FiArrowRight } from "react-icons/fi";
+import { useData } from "@/app/components/DataContext";
+import SplitText from "@/app/components/SplitText";
 
-const ServicesPage = () => {
+export default function ServicesPage() {
+  const { data } = useData();
+  const { services, workProcess } = data;
   return (
-    <div className="pt-20 sm:pt-24">
-      {/* ═══ Section Layanan ═══ */}
-      <section className="py-12 sm:py-16 px-4 bg-dark-900">
-        <div className="container mx-auto">
-          {/* Title — Clip circle */}
-          <GSAPReveal preset="clip-circle" duration={1.2}>
-            <div className="text-center mb-10 sm:mb-16">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
-                Solusi <span className="gradient-text">Digital</span>
-              </h1>
-              <p className="text-dark-300 max-w-3xl mx-auto text-sm sm:text-base">
-                Berbagai layanan pengembangan web yang saya tawarkan untuk
-                membantu bisnis Anda.
-              </p>
-            </div>
-          </GSAPReveal>
-
-          {/* Service cards — Flip up staggered */}
-          <GSAPReveal preset="flip-up" stagger={0.15} duration={1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {services.map((service: Service) => (
-              <div key={service.id} className="card p-6 sm:p-8 h-full group hover:border-primary/30 transition-all duration-500 hover:-translate-y-2">
-                <div className="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-125 transition-transform duration-500 inline-block">{service.icon}</div>
-                <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 group-hover:text-primary transition-colors duration-300">
-                  {service.title}
-                </h2>
-                <p className="text-dark-300 text-sm sm:text-base">{service.description}</p>
-              </div>
-            ))}
-          </GSAPReveal>
+    <div className="w-full min-h-screen py-6 md:py-8 px-4 sm:px-6 md:px-8 lg:px-10 flex flex-col gap-4 sm:gap-5">
+      
+      {/* Bento Layout Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+        
+        {/* Header Box (Full width) */}
+        <div className="lg:col-span-3 card-minimal p-8 sm:p-12 flex flex-col justify-between">
+          <div>
+            <span className="text-xs font-mono uppercase tracking-wider text-charcoal-muted block mb-3">
+              Layanan & Solusi
+            </span>
+            <SplitText
+              text="Solusi Digital Kreatif"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-1.5px] text-charcoal leading-none mb-6"
+              delay={35}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 30 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              textAlign="left"
+            />
+            <p className="text-charcoal-muted text-sm sm:text-base max-w-2xl leading-relaxed">
+              Berbagai layanan pengembangan web yang saya tawarkan untuk membantu mentransformasikan bisnis Anda ke dunia digital dengan standar performa dan kualitas tinggi.
+            </p>
+          </div>
         </div>
-      </section>
 
-      {/* ═══ Section Proses Kerja ═══ */}
-      <section className="py-12 sm:py-20 px-4 bg-dark-950">
-        <div className="container mx-auto">
-          {/* Title — Blur-in */}
-          <GSAPReveal preset="blur-in" duration={1}>
-            <div className="text-center mb-10 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
-                Bagaimana Saya <span className="gradient-text">Bekerja</span>
-              </h2>
-              <p className="text-dark-300 max-w-2xl mx-auto text-sm sm:text-base">
-                Proses pengembangan yang sistematis untuk memastikan hasil
-                terbaik.
+        {/* Services Cards (3 columns) */}
+        {services.map((service) => (
+          <div 
+            key={service.id} 
+            className="card-minimal p-8 flex flex-col justify-between group hover:border-charcoal-border transition-colors duration-300"
+          >
+            <div>
+              <div className="text-3xl mb-6 bg-cream p-3 rounded-lg border border-cream-border w-fit group-hover:bg-cream-light transition-colors duration-300">
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-bold text-charcoal mb-4">
+                {service.title}
+              </h3>
+              <p className="text-charcoal-muted text-sm leading-relaxed">
+                {service.description}
               </p>
             </div>
-          </GSAPReveal>
+            <Link 
+              href="/contact" 
+              className="mt-8 pt-4 border-t border-cream-border flex items-center text-xs font-semibold text-charcoal group-hover:underline"
+            >
+              Mulai Konsultasi <FiArrowRight className="ml-1.5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
+        ))}
 
-          {/* Work process timeline — Slide-rotate staggered with parallax numbers */}
-          <div className="max-w-4xl mx-auto">
-            {workProcess.map((process, index) => (
-              <GSAPReveal key={index} preset="slide-rotate" duration={0.9} delay={index * 0.12}>
-                <div className="relative pl-12 sm:pl-16 pb-10 sm:pb-12 border-l-2 border-dark-700 last:border-0 last:pb-0">
-                  <ParallaxSection speed={-0.05}>
-                    <div className="absolute top-0 -left-5 sm:-left-6 w-10 sm:w-12 h-10 sm:h-12 flex items-center justify-center rounded-full bg-gradient-primary shadow-lg shadow-primary/20">
-                      <span className="text-white font-bold text-sm sm:text-base">{process.step}</span>
-                    </div>
-                  </ParallaxSection>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
-                    {process.title}
-                  </h3>
-                  <p className="text-dark-300 text-sm sm:text-base">{process.description}</p>
+        {/* Work Process Header Box */}
+        <div className="lg:col-span-3 card-minimal p-8 sm:p-12 mt-4">
+          <div className="mb-12">
+            <span className="text-xs font-mono uppercase tracking-wider text-charcoal-muted block mb-3">
+              Metodologi Kerja
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-charcoal">Bagaimana Saya Bekerja</h3>
+            <p className="text-charcoal-muted text-sm mt-1 leading-relaxed">
+              Proses pengembangan terstruktur yang dirancang untuk memastikan transparansi, efisiensi, dan hasil berkualitas tinggi di setiap tahap.
+            </p>
+          </div>
+
+          {/* Work Process Grid timeline */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            {workProcess.map((process) => (
+              <div key={process.step} className="bg-cream p-6 rounded-xl border border-cream-border flex flex-col justify-between relative overflow-hidden group hover:border-charcoal-border transition-colors duration-300">
+                <div>
+                  <div className="text-3xl font-black text-charcoal-muted/20 font-mono absolute right-4 top-4">
+                    {String(process.step).padStart(2, '0')}
+                  </div>
+                  <h4 className="text-base font-bold text-charcoal mt-8 mb-3 flex items-center gap-2">
+                    <FiCheckCircle className="text-charcoal-muted text-sm" /> {process.title}
+                  </h4>
+                  <p className="text-charcoal-muted text-xs sm:text-sm leading-relaxed">
+                    {process.description}
+                  </p>
                 </div>
-              </GSAPReveal>
+              </div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* ═══ CTA Section — Blur-in with scale ═══ */}
-      <section className="py-12 sm:py-20 px-4 bg-dark-900">
-        <div className="container mx-auto text-center">
-          <GSAPReveal preset="scale-up" duration={1}>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Siap untuk Memulai?</h2>
-            <p className="text-dark-300 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base">
-              Jadwalkan konsultasi gratis untuk mendiskusikan proyek Anda dan
-              melihat bagaimana saya dapat membantu mewujudkannya.
-            </p>
-            <Link
-              href="/contact"
-              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-primary text-white font-semibold rounded-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 inline-block hover:-translate-y-1"
-            >
-              Jadwalkan Konsultasi
-            </Link>
-          </GSAPReveal>
+        {/* CTA Box (Full width) */}
+        <div className="lg:col-span-3 card-minimal p-8 sm:p-12 text-center flex flex-col items-center justify-center bg-cream-light mt-4">
+          <h3 className="text-2xl font-bold text-charcoal mb-4">Siap untuk Memulai Proyek Anda?</h3>
+          <p className="text-charcoal-muted text-sm max-w-xl leading-relaxed mb-8">
+            Diskusikan kebutuhan ide dan bisnis Anda bersama saya. Mari kita temukan solusi terbaik untuk menciptakan produk digital yang luar biasa.
+          </p>
+          <Link href="/contact" className="btn-primary-dark px-8 py-3">
+            Jadwalkan Konsultasi Gratis <FiArrowRight className="ml-2" />
+          </Link>
         </div>
-      </section>
+
+      </div>
     </div>
   );
-};
-
-export default ServicesPage;
+}

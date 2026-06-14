@@ -22,27 +22,96 @@
     "name": "I'm Irfan Syahputra",
     "role": "Full Stack Developer",
     "description": "Crafting seamless web experiences with React, Node.js, and beyond.",
-    "rotatingTexts": ["React", "Next.js", "Is", "Cool!"]
+    "rotatingTexts": [
+      "React",
+      "Next.js",
+      "Is",
+      "Cool!"
+    ]
   },
   "stats": [
-    { "value": 50, "label": "Projects Completed", "suffix": "+" },
-    { "value": 95, "label": "Client Satisfaction", "suffix": "%" },
-    { "value": 5, "label": "Years Experience", "suffix": "+" },
-    { "value": 100, "label": "Code Reviews", "suffix": "+" }
+    {
+      "value": 50,
+      "label": "Projects Completed",
+      "suffix": "+"
+    },
+    {
+      "value": 95,
+      "label": "Client Satisfaction",
+      "suffix": "%"
+    },
+    {
+      "value": 5,
+      "label": "Years Experience",
+      "suffix": "+"
+    },
+    {
+      "value": 100,
+      "label": "Code Reviews",
+      "suffix": "+"
+    }
   ],
   "skills": [
-    { "name": "HTML5 & CSS3", "level": 95, "category": "Frontend" },
-    { "name": "JavaScript (ES6+)", "level": 90, "category": "Frontend" },
-    { "name": "React.js", "level": 92, "category": "Frontend" },
-    { "name": "Next.js", "level": 85, "category": "Frontend" },
-    { "name": "TypeScript", "level": 80, "category": "Frontend" },
-    { "name": "Tailwind CSS", "level": 88, "category": "Frontend" },
-    { "name": "Node.js", "level": 78, "category": "Backend" },
-    { "name": "MongoDB", "level": 70, "category": "Backend" },
-    { "name": "Git & GitHub", "level": 85, "category": "Tools" },
-    { "name": "GraphQL", "level": 75, "category": "Backend" },
-    { "name": "Redux", "level": 82, "category": "Frontend" },
-    { "name": "Firebase", "level": 70, "category": "Backend" }
+    {
+      "name": "HTML5 & CSS3",
+      "level": 95,
+      "category": "Frontend"
+    },
+    {
+      "name": "JavaScript (ES6+)",
+      "level": 90,
+      "category": "Frontend"
+    },
+    {
+      "name": "React.js",
+      "level": 92,
+      "category": "Frontend"
+    },
+    {
+      "name": "Next.js",
+      "level": 85,
+      "category": "Frontend"
+    },
+    {
+      "name": "TypeScript",
+      "level": 80,
+      "category": "Frontend"
+    },
+    {
+      "name": "Tailwind CSS",
+      "level": 88,
+      "category": "Frontend"
+    },
+    {
+      "name": "Node.js",
+      "level": 78,
+      "category": "Backend"
+    },
+    {
+      "name": "MongoDB",
+      "level": 70,
+      "category": "Backend"
+    },
+    {
+      "name": "Git & GitHub",
+      "level": 85,
+      "category": "Tools"
+    },
+    {
+      "name": "GraphQL",
+      "level": 75,
+      "category": "Backend"
+    },
+    {
+      "name": "Redux",
+      "level": 82,
+      "category": "Frontend"
+    },
+    {
+      "name": "Firebase",
+      "level": 70,
+      "category": "Backend"
+    }
   ],
   "experiences": [
     {
@@ -110,33 +179,17 @@
   "projects": [
     {
       "id": 1,
-      "title": "Modern Portfolio Website",
-      "description": "A personal portfolio website built with Next.js and Three.js, featuring interactive 3D elements and smooth animations. This project showcases modern web development practices and creative design implementation.",
-      "image": "/assets/projects/portfolio.svg",
-      "link": "https://portfolio.example.com",
-      "category": ["Web Development", "3D Graphics"],
-      "technologies": ["Next.js", "Three.js", "TailwindCSS", "Framer Motion"],
-      "featured": true
-    },
-    {
-      "id": 2,
-      "title": "E-Commerce Platform",
-      "description": "A full-featured e-commerce platform with real-time inventory management, secure payment processing, and responsive design for optimal user experience across all devices.",
-      "image": "/assets/projects/ecommerce.svg",
-      "link": "https://ecommerce.example.com",
-      "category": ["Web Development", "E-Commerce"],
-      "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
-      "featured": true
-    },
-    {
-      "id": 3,
-      "title": "AI Dashboard Analytics",
-      "description": "An intelligent analytics dashboard powered by machine learning that provides real-time insights, predictive analytics, and automated reporting for data-driven decision making.",
-      "image": "/assets/projects/dashboard.svg",
-      "link": "https://dashboard.example.com",
-      "category": ["Web Development", "AI/ML"],
-      "technologies": ["Next.js", "Python", "TensorFlow", "PostgreSQL"],
-      "featured": true
+      "title": "Split Math",
+      "description": "Split Math is a web-based learning platform specifically designed to help students, particularly elementary school students, understand the concept of fractions in mathematics easily and enjoyably. This website transforms conventional, often theoretical, learning methods into a colorful, interactive, and visual experience, making complex material easier to digest.",
+      "image": "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781455402/portfolio/projects/kr8ddzzglchfockdwsoo.png",
+      "link": "https://split-math-v5.vercel.app/",
+      "category": [
+        "Education Web"
+      ],
+      "technologies": [
+        "HTML"
+      ],
+      "featured": false
     }
   ],
   "testimonials": [

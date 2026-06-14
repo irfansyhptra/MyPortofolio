@@ -14,6 +14,12 @@ const config: Config = {
         sans: ["var(--font-poppins)", "Poppins", "sans-serif"],
       },
       colors: {
+        cream: "#f7f4ed",
+        "cream-light": "#fcfbf8",
+        "cream-border": "#eceae4",
+        charcoal: "#1c1c1c",
+        "charcoal-muted": "#5f5f5d",
+        "charcoal-border": "rgba(28, 28, 28, 0.4)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
