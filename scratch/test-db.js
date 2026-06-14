@@ -1,6 +1,22 @@
 const { MongoClient } = require("mongodb");
+const fs = require("fs");
+const path = require("path");
 
-const uri = "mongodb+srv://irfan19ksp:user1234@cluster0.9xymjhb.mongodb.net/?appName=Cluster0";
+// Manually parse .env file
+const envPath = path.join(__dirname, "..", ".env");
+let uri = "";
+if (fs.existsSync(envPath)) {
+  const envContent = fs.readFileSync(envPath, "utf8");
+  const match = envContent.match(/^MONGODB_URI=["']?([^"'\r\n]+)["']?/m);
+  if (match) {
+    uri = match[1];
+  }
+}
+
+if (!uri) {
+  console.error("MONGODB_URI not found in .env file");
+  process.exit(1);
+}
 
 async function main() {
   const client = new MongoClient(uri);

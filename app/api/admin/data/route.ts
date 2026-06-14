@@ -41,7 +41,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(data);
   } catch (err: any) {
     console.error("GET site data database error:", err);
-    return NextResponse.json({ error: "Failed to read data from database" }, { status: 500 });
+    try {
+      const localData = getSiteData();
+      return NextResponse.json({ ...localData, _isOffline: true });
+    } catch {
+      return NextResponse.json({ error: "Failed to read data from database" }, { status: 500 });
+    }
   }
 }
 
@@ -95,6 +100,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ success: true, section });
   } catch (err: any) {
     console.error("PUT site data database error:", err);
-    return NextResponse.json({ error: "Failed to update data in database" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Database not connected. Unable to save changes. Make sure MONGODB_URI is set." },
+      { status: 500 }
+    );
   }
 }

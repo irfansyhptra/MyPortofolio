@@ -23,7 +23,7 @@ const navItems = [
 
 /* ─── Inner layout (requires auth) ───────────────── */
 function AdminShell({ children }: { children: React.ReactNode }) {
-  const { isLoggedIn, logout, loading } = useAdmin();
+  const { isLoggedIn, logout, loading, isOffline } = useAdmin();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
 
@@ -129,6 +129,14 @@ function AdminShell({ children }: { children: React.ReactNode }) {
 
         {/* Page content */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+          {isOffline && (
+            <div className="mb-6 p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-sm flex items-center gap-3">
+              <span className="text-xl">⚠️</span>
+              <div>
+                <strong>Offline Mode (Read-Only)</strong>: Aplikasi tidak terhubung ke database MongoDB. Perubahan tidak dapat disimpan. Silakan tambahkan variabel lingkungan <code>MONGODB_URI</code> di dashboard Vercel Anda.
+              </div>
+            </div>
+          )}
           {children}
         </main>
       </div>

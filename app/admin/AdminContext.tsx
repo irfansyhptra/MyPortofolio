@@ -8,6 +8,7 @@ interface AdminContextType {
   isLoggedIn: boolean;
   siteData: SiteData | null;
   loading: boolean;
+  isOffline: boolean;
   login: (password: string) => Promise<boolean>;
   logout: () => void;
   fetchData: () => Promise<void>;
@@ -27,6 +28,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [siteData, setSiteData] = useState<SiteData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isOffline, setIsOffline] = useState(false);
 
   // Restore token from localStorage
   useEffect(() => {
@@ -66,6 +68,12 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       });
       if (res.ok) {
         const data = await res.json();
+        if (data && data._isOffline) {
+          setIsOffline(true);
+          delete data._isOffline;
+        } else {
+          setIsOffline(false);
+        }
         setSiteData(data);
       }
     } catch {
@@ -129,6 +137,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
         isLoggedIn: !!token,
         siteData,
         loading,
+        isOffline,
         login,
         logout,
         fetchData,
