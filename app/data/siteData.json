@@ -4,7 +4,7 @@
     "role": "Full Stack Developer",
     "bio": "Seorang pengembang web profesional dengan fokus pada teknologi modern untuk menciptakan aplikasi yang cepat, responsif, dan intuitif.",
     "journeyText": "Saya adalah seorang pengembang web dengan spesialisasi dalam membangun aplikasi modern menggunakan React.js, Next.js, dan ekosistem JavaScript. Saya bersemangat dalam mengubah ide-ide kompleks menjadi solusi digital yang elegan dan fungsional.\n\nDengan pengalaman lebih dari 5 tahun di industri teknologi, saya telah mengerjakan berbagai proyek dari website company profile hingga aplikasi web kompleks dengan fitur real-time. Fokus saya adalah memberikan solusi yang tidak hanya terlihat menarik, tetapi juga memiliki performa tinggi dan pengalaman pengguna yang optimal.",
-    "photo": "/assets/6.svg",
+    "photo": "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781457883/portfolio/profile/rfgwpe0lowl0j8z9pw5c.png",
     "cv": "/assets/CV_Irfan_Syahputra.pdf",
     "location": "Jakarta, Indonesia",
     "email": "kontak@irfansyahputra.com",
@@ -188,6 +188,98 @@
       ],
       "technologies": [
         "HTML"
+      ],
+      "featured": false
+    },
+    {
+      "id": 2,
+      "title": "Eventory",
+      "description": "Eventory is a front-end web application that functions as a complete and interactive event management system. The platform is designed to connect event organizers with attendees, providing a suite of features for creating, discovering, joining, and managing various types of events. The application has two main roles: Users, who can create and participate in events, and Administrators.",
+      "image": "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781456513/portfolio/projects/tofuh0w9ygerefcchgyw.png",
+      "link": "https://eventoryy.vercel.app/",
+      "category": [
+        "Web"
+      ],
+      "technologies": [
+        "React"
+      ],
+      "featured": false
+    },
+    {
+      "id": 3,
+      "title": "ABSENTEEISM",
+      "description": "The Teacher Attendance System is a web-based dashboard application designed specifically for teachers at SMK N 3 Kejuruan Muda. Its primary purpose is to modernize and simplify the process of recording attendance, managing teaching schedules, and digitally monitoring absence history. With a clean and interactive interface, the system provides all the information and tools teachers need in one centralized platform.",
+      "image": "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781459625/portfolio/projects/o3z1zbsedwgwjzliid9n.png",
+      "link": "",
+      "category": [
+        "School System",
+        "Web Dev"
+      ],
+      "technologies": [
+        "HTML",
+        "Java Script",
+        "CSS",
+        "Tailwind",
+        "MonggoDB",
+        "Express.js"
+      ],
+      "featured": false
+    },
+    {
+      "id": 4,
+      "title": "SILAPOR BANDA ACEH",
+      "description": "SILAPOR is a web application platform that functions as an Online Complaints Information System for Banda Aceh City residents. This project is designed to bridge communication between the community and the city government, providing an efficient, transparent, and structured means for residents to report various issues or problems encountered in their environment.",
+      "image": "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781459808/portfolio/projects/tksfjwxub09yjrau7nvg.png",
+      "link": "https://silapor.vercel.app/",
+      "category": [
+        "Web Development"
+      ],
+      "technologies": [
+        "HTML",
+        "Java Script",
+        "CSS",
+        "Tailwind",
+        "MonggoDB",
+        "cloudinary",
+        "Express.js"
+      ],
+      "featured": false
+    },
+    {
+      "id": 5,
+      "title": "HIMADIKWARA",
+      "description": "This project is a modern web platform built as a profile site and information system for the Pancasila and Citizenship Education Student Association (HIMAPRODI PPKn) at Syiah Kuala University. As the digital face of the organization, it provides comprehensive information on the association's profile, management structure, work programs, and activity agenda to students and the public.",
+      "image": "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781459975/portfolio/projects/kktvkyf7xkzowb9kz2n0.png",
+      "link": "https://himadikwara-usk.my.id/",
+      "category": [
+        "Web Development"
+      ],
+      "technologies": [
+        "HTML",
+        "Tailwind CSS",
+        "Express.js",
+        "React.js",
+        "MonggoDB",
+        "Supabase",
+        "Java Script"
+      ],
+      "featured": false
+    },
+    {
+      "id": 6,
+      "title": "FreshChain",
+      "description": "FreshChain: Sistem Distribusi Pangan\nLokal untuk Mengurangi Food Loss dalam Mendukung Sustainable Food\nSystem ,Solusi End-to-End Crowdfunding dan Marketplace Pertanian",
+      "image": "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781460340/portfolio/projects/xhdpt7c6oxdzmjqrtlf0.jpg",
+      "link": "https://freshchain.vercel.app/",
+      "category": [
+        "Web Dev",
+        "Crowdfunding",
+        "Marketplace"
+      ],
+      "technologies": [
+        "Next.js",
+        "MonggoDB",
+        "Cloudenary"
       ],
       "featured": false
     }
