@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSiteData, writeSiteData, type SiteData } from "@/app/data/siteDataManager";
+import { getSiteData, type SiteData } from "@/app/data/siteDataManager";
 import { getDb } from "@/app/lib/mongodb";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
@@ -89,14 +89,6 @@ export async function PUT(request: NextRequest) {
       { _id: "site_data_main" },
       { $set: { [section]: value } }
     );
-
-    // Sync changes back to local JSON for next static builds
-    const updatedData = await collection.findOne({ _id: "site_data_main" });
-    if (updatedData) {
-      delete updatedData._id;
-      writeSiteData(updatedData as SiteData);
-    }
-
     return NextResponse.json({ success: true, section });
   } catch (err: any) {
     console.error("PUT site data database error:", err);
