@@ -6,6 +6,7 @@ import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import FixedBackground from "@/app/components/FixedBackground";
 import { DataProvider } from "@/app/components/DataContext";
+import { BgmProvider } from "@/app/components/BgmContext";
 
 export default function PublicShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,17 +17,19 @@ export default function PublicShell({ children }: { children: React.ReactNode })
     return <>{children}</>;
   }
 
-  // Public routes get Navbar + Footer + background + dynamic DataProvider
+  // Public routes get Navbar + Footer + background + dynamic DataProvider + BgmProvider
   return (
     <DataProvider>
-      <FixedBackground />
-      <Navbar />
-      <main className="flex min-h-screen flex-col relative z-10 md:pl-20 pt-16 md:pt-0 bg-cream text-charcoal">
-        <div className="flex-1">
-          {children}
-        </div>
-        <Footer />
-      </main>
+      <BgmProvider>
+        <FixedBackground />
+        <Navbar />
+        <main className="flex min-h-screen flex-col relative z-10 md:pl-20 pt-16 md:pt-0 bg-cream text-charcoal">
+          <div className="flex-1">
+            {children}
+          </div>
+          <Footer />
+        </main>
+      </BgmProvider>
     </DataProvider>
   );
 }

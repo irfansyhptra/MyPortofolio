@@ -115,6 +115,22 @@ export const defaultSiteData: SiteData = {
       category: "Backend"
     }
   ],
+  educations: [
+    {
+      id: 1,
+      institution: "Universitas Syiah Kuala",
+      degree: "S1 Pendidikan Teknologi Informasi",
+      period: "2021 - Sekarang",
+      description: "Menempuh pendidikan di bidang teknologi informasi dengan fokus pada pengembangan web, pemrograman, dan sistem informasi."
+    },
+    {
+      id: 2,
+      institution: "SMK N 3 Kejuruan Muda",
+      degree: "Rekayasa Perangkat Lunak",
+      period: "2018 - 2021",
+      description: "Mempelajari dasar-dasar pemrograman, basis data, dan pengembangan perangkat lunak di tingkat menengah kejuruan."
+    }
+  ],
   experiences: [
     {
       id: 1,
@@ -129,6 +145,22 @@ export const defaultSiteData: SiteData = {
       company: "Digital Agency",
       period: "2021 - 2023",
       description: "Mengembangkan website dan aplikasi web untuk berbagai klien, berfokus pada UI/UX, responsivitas, dan pengalaman pengguna."
+    }
+  ],
+  organizations: [
+    {
+      id: 1,
+      name: "HIMAPRODI PPKn USK",
+      role: "Web Developer",
+      period: "2023 - 2024",
+      description: "Bertanggung jawab dalam pengembangan dan pemeliharaan website organisasi mahasiswa."
+    },
+    {
+      id: 2,
+      name: "Komunitas Developer Aceh",
+      role: "Anggota Aktif",
+      period: "2022 - Sekarang",
+      description: "Berkontribusi dalam kegiatan komunitas developer lokal, sharing knowledge, dan kolaborasi proyek open source."
     }
   ],
   services: [

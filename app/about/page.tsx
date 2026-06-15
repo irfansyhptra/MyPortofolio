@@ -5,10 +5,31 @@ import { FiDownload, FiArrowRight, FiBriefcase, FiCalendar } from "react-icons/f
 import { useData } from "@/app/components/DataContext";
 import AnimatedContent from "@/app/components/AnimatedContent";
 import SplitText from "@/app/components/SplitText";
+import { cn } from "@/app/lib/utils";
+import { StickyScroll } from "@/app/components/sticky-scroll-reveal";
+
 
 export default function AboutPage() {
   const { data } = useData();
-  const { skills, experiences, profile } = data;
+  const {
+    skills = [],
+    experiences = [],
+    educations = [],
+    organizations = [],
+    profile = {
+      name: "",
+      role: "",
+      bio: "",
+      journeyText: "",
+      photo: "",
+      cv: "",
+      location: "",
+      email: "",
+      phone: "",
+      availability: "",
+      socialLinks: { github: "", linkedin: "", instagram: "", twitter: "" }
+    }
+  } = data || {};
   const [hoveredSkillIndex, setHoveredSkillIndex] = useState<number | null>(null);
 
   // Group skills by category
@@ -63,14 +84,92 @@ export default function AboutPage() {
 
   const activeSkill = hoveredSkillIndex !== null ? skillsWithColors[hoveredSkillIndex] : null;
 
+  // Helper: build image card content for sticky scroll
+  const buildImageCard = (item: { image?: string; label1: string; label2: string; label3: string }, idx: number) => (
+    <div className="w-full h-full rounded-xl overflow-hidden relative group">
+      {item.image ? (
+        <>
+          <img
+            src={item.image}
+            alt={`${item.label2} — ${item.label1}`}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-4">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-white/50">
+              {item.label3}
+            </span>
+            <h5 className="text-sm font-bold text-white mt-0.5 line-clamp-1">
+              {item.label1}
+            </h5>
+            <span className="text-xs text-white/60 mt-0.5">
+              {item.label2}
+            </span>
+          </div>
+        </>
+      ) : (
+        <div className={cn(
+          "w-full h-full flex flex-col items-center justify-center gap-3",
+          idx % 2 === 0
+            ? "bg-gradient-to-br from-charcoal to-[#2e2e2e]"
+            : "bg-gradient-to-br from-[#eceae4] to-[#fcfbf8]"
+        )}>
+          <div className={cn(
+            "w-14 h-14 rounded-2xl flex items-center justify-center font-bold font-mono text-lg tracking-wider shadow-lg",
+            idx % 2 === 0
+              ? "bg-[#3d3d3c] text-cream-light border border-cream-light/10"
+              : "bg-cream-light text-charcoal border border-cream-border"
+          )}>
+            {item.label2.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase()}
+          </div>
+          <div className="text-center px-3">
+            <h5 className={cn("text-xs font-bold", idx % 2 === 0 ? "text-cream-light" : "text-charcoal")}>
+              {item.label2}
+            </h5>
+            <span className={cn("text-[10px] font-mono", idx % 2 === 0 ? "text-cream-light/50" : "text-charcoal-muted")}>
+              {item.label3}
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
+  // Map educations to StickyScroll items
+  const stickyEducations = educations.map((edu, idx) => ({
+    title: edu.degree,
+    subTitle: edu.institution,
+    period: edu.period,
+    description: edu.description,
+    content: buildImageCard({ image: edu.image, label1: edu.degree, label2: edu.institution, label3: edu.period }, idx),
+  }));
+
+  // Map experiences to StickyScroll items
+  const stickyExperiences = experiences.map((exp, idx) => ({
+    title: exp.position,
+    subTitle: exp.company,
+    period: exp.period,
+    description: exp.description,
+    content: buildImageCard({ image: exp.image, label1: exp.position, label2: exp.company, label3: exp.period }, idx),
+  }));
+
+  // Map organizations to StickyScroll items
+  const stickyOrganizations = organizations.map((org, idx) => ({
+    title: org.role,
+    subTitle: org.name,
+    period: org.period,
+    description: org.description,
+    content: buildImageCard({ image: org.image, label1: org.role, label2: org.name, label3: org.period }, idx),
+  }));
+
+
   return (
     <div className="w-full min-h-screen py-6 md:py-8 px-4 sm:px-6 md:px-8 lg:px-10 flex flex-col gap-4 sm:gap-5">
-      
+
       {/* Bento Layout Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
-        
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 sm:gap-5">
+
         {/* Box 1: Journey & Professional Bio (Left) */}
-        <div className="lg:col-span-2 card-minimal p-8 sm:p-12 flex flex-col justify-between min-h-[400px]">
+        <div className="lg:col-span-4 card-minimal p-8 sm:p-12 flex flex-col justify-between min-h-[400px]">
           <div>
             <span className="text-xs font-mono uppercase tracking-wider text-charcoal-muted block mb-3">
               Tentang Saya
@@ -87,7 +186,7 @@ export default function AboutPage() {
               threshold={0.1}
               textAlign="left"
             />
-            
+
             <p className="text-charcoal-muted text-sm sm:text-base leading-relaxed whitespace-pre-line max-w-2xl">
               {profile.journeyText}
             </p>
@@ -104,7 +203,7 @@ export default function AboutPage() {
         </div>
 
         {/* Box 2: Profile Picture Container (Right) */}
-        <div className="lg:col-span-1 card-minimal p-6 flex flex-col justify-center items-center bg-cream-light min-h-[350px]">
+        <div className="lg:col-span-2 card-minimal p-6 flex flex-col justify-center items-center bg-cream-light min-h-[350px]">
           <div className="relative w-full aspect-square max-w-[280px] rounded-xl overflow-hidden border border-cream-border bg-cream p-3 shadow-inner">
             <div className="w-full h-full rounded-lg overflow-hidden relative border border-cream-border bg-cream-light">
               <img
@@ -119,7 +218,7 @@ export default function AboutPage() {
         </div>
 
         {/* Box 3: Skills Section with Interactive Donut Chart */}
-        <div className="lg:col-span-3 card-minimal p-8 sm:p-12">
+        <div className="lg:col-span-6 card-minimal p-8 sm:p-12">
           <div className="mb-10">
             <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-charcoal">Teknologi & Tools</h3>
             <p className="text-charcoal-muted text-sm mt-1 leading-relaxed">
@@ -128,7 +227,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            
+
             {/* Left Column: Grouped Tags (7 Cols) */}
             <div className="md:col-span-7 flex flex-col gap-6">
               {Object.entries(categories).map(([categoryName, skillList]) => (
@@ -141,17 +240,16 @@ export default function AboutPage() {
                       // Find matching color / index from our master array
                       const masterIndex = skills.findIndex(s => s.name === skill.name);
                       const isHovered = hoveredSkillIndex === masterIndex;
-                      
+
                       return (
                         <button
                           key={skill.name}
                           onMouseEnter={() => setHoveredSkillIndex(masterIndex)}
                           onMouseLeave={() => setHoveredSkillIndex(null)}
-                          className={`text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all duration-200 ${
-                            isHovered
-                              ? "bg-charcoal text-cream-light border-charcoal shadow-[rgba(255,255,255,0.15)_0px_0.5px_0px_0px_inset]"
-                              : "bg-cream-light text-charcoal-muted border-cream-border hover:border-charcoal-border hover:text-charcoal"
-                          }`}
+                          className={`text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all duration-200 ${isHovered
+                            ? "bg-charcoal text-cream-light border-charcoal shadow-[rgba(255,255,255,0.15)_0px_0.5px_0px_0px_inset]"
+                            : "bg-cream-light text-charcoal-muted border-cream-border hover:border-charcoal-border hover:text-charcoal"
+                            }`}
                         >
                           {skill.name}
                         </button>
@@ -169,13 +267,13 @@ export default function AboutPage() {
                   {skillsWithColors.map((skill, i) => {
                     const startAngle = i * anglePerSector + gap / 2;
                     const endAngle = (i + 1) * anglePerSector - gap / 2;
-                    
+
                     // Base inner boundary radius is 48. Level (0-100) maps to radius increments up to 92 max
                     const baseRadius = 48;
                     const maxRadius = 92;
                     const isHovered = hoveredSkillIndex === i;
                     const r = baseRadius + (maxRadius - baseRadius) * (skill.level / 100);
-                    
+
                     return (
                       <path
                         key={skill.name}
@@ -193,7 +291,7 @@ export default function AboutPage() {
                   {/* Center cutout circle */}
                   <circle cx="100" cy="100" r="44" fill="#fcfbf8" className="stroke-cream-border stroke-[1px]" />
                 </svg>
-                
+
                 {/* Center Content Overlaid */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none p-4">
                   <span className="text-[9px] font-mono uppercase tracking-wider text-charcoal-muted">
@@ -212,40 +310,37 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Box 4: Experiences Professional Timeline */}
+        {/* Box 4: Education Section */}
         <div className="lg:col-span-3 card-minimal p-8 sm:p-12">
+          <div className="mb-10">
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-charcoal">Pendidikan</h3>
+            <p className="text-charcoal-muted text-sm mt-1 leading-relaxed">
+              Riwayat pendidikan formal yang telah saya tempuh.
+            </p>
+          </div>
+          <StickyScroll content={stickyEducations} />
+        </div>
+
+        {/* Box 6: Organization Section */}
+        <div className="lg:col-span-3 card-minimal p-8 sm:p-12">
+          <div className="mb-10">
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-charcoal">Organisasi</h3>
+            <p className="text-charcoal-muted text-sm mt-1 leading-relaxed">
+              Pengalaman berorganisasi dan kontribusi dalam komunitas.
+            </p>
+          </div>
+          <StickyScroll content={stickyOrganizations} />
+        </div>
+
+        {/* Box 5: Experiences Professional Timeline */}
+        <div className="lg:col-span-6 card-minimal p-8 sm:p-12">
           <div className="mb-10">
             <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-charcoal">Pengalaman Kerja</h3>
             <p className="text-charcoal-muted text-sm mt-1 leading-relaxed">
               Riwayat karir profesional dan kontribusi industri saya selama ini.
             </p>
           </div>
-
-          <div className="relative border-l border-cream-border ml-4 md:ml-6 pl-6 md:pl-10 space-y-12 py-2">
-            {experiences.map((exp) => (
-              <div key={exp.id} className="relative group">
-                {/* Timeline Dot Indicator */}
-                <div className="absolute -left-[31px] md:-left-[47px] top-1.5 w-4 h-4 rounded-full border-2 border-cream-border bg-cream transition-colors duration-300 group-hover:border-charcoal group-hover:bg-charcoal" />
-                
-                {/* Period Badge */}
-                <div className="flex items-center gap-1.5 text-xs text-charcoal-muted font-mono font-medium">
-                  <FiCalendar /> {exp.period}
-                </div>
-                
-                <h4 className="text-lg font-bold text-charcoal mt-2 flex items-center gap-2">
-                  <FiBriefcase className="text-sm text-charcoal-muted" /> {exp.position}
-                </h4>
-                
-                <div className="text-xs uppercase tracking-wider text-charcoal-muted font-semibold mt-1 font-mono">
-                  {exp.company}
-                </div>
-                
-                <p className="text-charcoal-muted text-sm mt-3 leading-relaxed max-w-3xl">
-                  {exp.description}
-                </p>
-              </div>
-            ))}
-          </div>
+          <StickyScroll content={stickyExperiences} cardClassName="lg:w-[70%] lg:h-[35rem] max-w-[1100px]" />
         </div>
 
       </div>

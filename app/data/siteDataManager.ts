@@ -46,6 +46,25 @@ export interface ExperienceItem {
   company: string;
   period: string;
   description: string;
+  image?: string;
+}
+
+export interface EducationItem {
+  id: number;
+  institution: string;
+  degree: string;
+  period: string;
+  description: string;
+  image?: string;
+}
+
+export interface OrganizationItem {
+  id: number;
+  name: string;
+  role: string;
+  period: string;
+  description: string;
+  image?: string;
 }
 
 export interface ServiceItem {
@@ -99,7 +118,9 @@ export interface SiteData {
   hero: HeroData;
   stats: StatItem[];
   skills: SkillItem[];
+  educations: EducationItem[];
   experiences: ExperienceItem[];
+  organizations: OrganizationItem[];
   services: ServiceItem[];
   workProcess: WorkProcessItem[];
   projects: ProjectItem[];

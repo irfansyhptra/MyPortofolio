@@ -53,11 +53,25 @@ export default function AdminDashboard() {
       color: "from-cyan-500/20 to-teal-500/20",
     },
     {
+      label: "Education",
+      value: (siteData.educations || []).length,
+      icon: "🎓",
+      href: "/admin/education",
+      color: "from-indigo-500/20 to-blue-500/20",
+    },
+    {
       label: "Experience",
       value: siteData.experiences.length,
       icon: "📋",
       href: "/admin/experience",
       color: "from-pink-500/20 to-rose-500/20",
+    },
+    {
+      label: "Organization",
+      value: (siteData.organizations || []).length,
+      icon: "🏛️",
+      href: "/admin/organization",
+      color: "from-amber-500/20 to-orange-500/20",
     },
   ];
 
@@ -93,7 +107,7 @@ export default function AdminDashboard() {
       </Card>
 
       {/* Quick Stats Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4 mb-6">
         {quickStats.map((stat) => (
           <Link key={stat.label} href={stat.href}>
             <Card className="hover:border-white/20 transition-colors cursor-pointer h-full">
@@ -114,12 +128,14 @@ export default function AdminDashboard() {
         <h3 className="text-sm font-medium text-white/60 mb-4">
           Quick Actions
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {[
             { label: "Edit Hero Section", href: "/admin/hero", icon: "🏠" },
             { label: "Add New Project", href: "/admin/projects", icon: "➕" },
             { label: "Write Blog Post", href: "/admin/blog", icon: "✍️" },
             { label: "Update Skills", href: "/admin/skills", icon: "⚡" },
+            { label: "Manage Education", href: "/admin/education", icon: "🎓" },
+            { label: "Manage Organization", href: "/admin/organization", icon: "🏛️" },
             { label: "Edit Contact Info", href: "/admin/contact", icon: "📞" },
             { label: "View Live Site", href: "/", icon: "🌐" },
           ].map((action) => (

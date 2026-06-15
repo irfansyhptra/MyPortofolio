@@ -93,6 +93,9 @@ import BlurText from "@/app/components/BlurText";
 import AnimatedContent from "@/app/components/AnimatedContent";
 import LogoLoop from "@/app/components/LogoLoop";
 import { useData } from "@/app/components/DataContext";
+import BgmPlayerWidget from "@/app/components/BgmPlayerWidget";
+import BgmLyricsWidget from "@/app/components/BgmLyricsWidget";
+import { Spotlight } from "@/app/components/Spotlight";
 
 const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
@@ -245,23 +248,23 @@ export default function Home() {
 
         {/* Box 2: Interactive 3D Lanyard */}
         <div className="lg:col-span-1 card-minimal overflow-hidden relative min-h-[450px] bg-cream-light p-0">
-          <div className="absolute inset-0">
+          <Spotlight
+            className="left-[50%] top-[30%]"
+            fill="rgba(28, 28, 28, 0.6)"
+          />
+          <div className="absolute inset-0 z-10">
             <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />
           </div>
         </div>
 
-        {/* Box 3: Stats row */}
-        <div className="lg:col-span-2 card-minimal p-8 flex flex-wrap gap-8 justify-around items-center">
-          {stats.map((stat, i) => (
-            <div key={i} className="text-center sm:text-left flex flex-col min-w-[120px]">
-              <div className="text-4xl sm:text-5xl font-bold tracking-tight text-charcoal font-sans">
-                {stat.value}{stat.suffix}
-              </div>
-              <div className="text-[10px] uppercase tracking-wider text-charcoal-muted mt-1.5 font-semibold font-mono">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+        {/* Box 3: Background Music Player */}
+        <div className="lg:col-span-2 card-minimal p-4 sm:p-5 flex flex-col justify-center h-[180px] lg:h-[165px] overflow-hidden">
+          <BgmPlayerWidget />
+        </div>
+
+        {/* Box 3.5: Background Music Lyrics */}
+        <div className="lg:col-span-1 card-minimal p-4 sm:p-5 flex flex-col justify-center h-[180px] lg:h-[165px] overflow-hidden">
+          <BgmLyricsWidget />
         </div>
 
         {/* Box 4: Tech logo loop (cream-light container) */}

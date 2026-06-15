@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSiteData, type SiteData } from "@/app/data/siteDataManager";
 import { getDb } from "@/app/lib/mongodb";
 
+export const dynamic = "force-dynamic";
+
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
 
 function isAuthorized(request: NextRequest): boolean {
@@ -29,11 +31,27 @@ export async function GET(request: NextRequest) {
       // Seed database with local siteData.json
       const localData = getSiteData();
       await collection.insertOne({ _id: "site_data_main", ...localData });
-      data = { _id: "site_data_main", ...localData };
+      data = { ...localData };
+    } else {
+      const localData = getSiteData();
+      data = { ...localData, ...data };
     }
 
     // Remove internal _id for frontend consistency
-    delete data._id;
+    if (data && "_id" in data) {
+      delete data._id;
+    }
+
+    // Ensure all items in array sections have the image field
+    if (data.educations) {
+      data.educations = data.educations.map((item: any) => ({ image: "", ...item }));
+    }
+    if (data.experiences) {
+      data.experiences = data.experiences.map((item: any) => ({ image: "", ...item }));
+    }
+    if (data.organizations) {
+      data.organizations = data.organizations.map((item: any) => ({ image: "", ...item }));
+    }
 
     if (section && section in data) {
       return NextResponse.json({ [section]: data[section] });
@@ -74,7 +92,10 @@ export async function PUT(request: NextRequest) {
     if (!currentData) {
       const localData = getSiteData();
       await collection.insertOne({ _id: "site_data_main", ...localData });
-      currentData = { _id: "site_data_main", ...localData };
+      currentData = { ...localData };
+    } else {
+      const localData = getSiteData();
+      currentData = { ...localData, ...currentData };
     }
 
     if (!(section in currentData)) {

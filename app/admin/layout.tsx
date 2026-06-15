@@ -16,7 +16,9 @@ const navItems = [
   { href: "/admin/blog", label: "Blog", icon: "📝" },
   { href: "/admin/testimonials", label: "Testimonials", icon: "💬" },
   { href: "/admin/skills", label: "Skills", icon: "⚡" },
+  { href: "/admin/education", label: "Education", icon: "🎓" },
   { href: "/admin/experience", label: "Experience", icon: "📋" },
+  { href: "/admin/organization", label: "Organization", icon: "🏛️" },
   { href: "/admin/stats", label: "Stats", icon: "📈" },
   { href: "/admin/contact", label: "Contact", icon: "📞" },
 ];
