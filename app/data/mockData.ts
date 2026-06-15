@@ -1,4 +1,4 @@
-import siteDataJson from "./siteData.json";
+import { defaultSiteData } from "./defaultSiteData";
 
 export interface Stats {
   value: number;
@@ -33,6 +33,9 @@ export interface Project {
   category: string[];
   technologies: string[];
   featured?: boolean;
+  monthCreated?: string;
+  yearCreated?: string;
+  testimonial?: string;
 }
 
 export interface Testimonial {
@@ -63,14 +66,14 @@ export interface Experience {
   description: string;
 }
 
-// ─── All data comes from siteData.json (managed by admin) ───
-export const testimonials: Testimonial[] = siteDataJson.testimonials;
-export const services: Service[] = siteDataJson.services;
-export const stats: Stats[] = siteDataJson.stats;
-export const blogPosts: BlogPost[] = siteDataJson.blogPosts;
-export const projects: Project[] = siteDataJson.projects;
-export const workProcess: WorkProcess[] = siteDataJson.workProcess;
-export const skills: Skill[] = siteDataJson.skills;
-export const experiences: Experience[] = siteDataJson.experiences;
-export const profile = siteDataJson.profile;
-export const hero = siteDataJson.hero;
+// ─── Fallbacks point to defaultSiteData constant ───
+export const testimonials: Testimonial[] = defaultSiteData.testimonials;
+export const services: Service[] = defaultSiteData.services;
+export const stats: Stats[] = defaultSiteData.stats;
+export const blogPosts: BlogPost[] = defaultSiteData.blogPosts;
+export const projects: Project[] = defaultSiteData.projects;
+export const workProcess: WorkProcess[] = defaultSiteData.workProcess;
+export const skills: Skill[] = defaultSiteData.skills;
+export const experiences: Experience[] = defaultSiteData.experiences;
+export const profile = defaultSiteData.profile;
+export const hero = defaultSiteData.hero;

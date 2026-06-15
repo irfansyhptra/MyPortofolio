@@ -21,10 +21,24 @@ export default function PortfolioPage() {
     "web3",
   ];
 
+  const monthOrder: { [key: string]: number } = {
+    "januari": 1, "februari": 2, "maret": 3, "april": 4, "mei": 5, "juni": 6,
+    "juli": 7, "agustus": 8, "september": 9, "oktober": 10, "november": 11, "desember": 12,
+    "january": 1, "february": 2, "march": 3, "may": 5, "july": 7, "august": 8, "december": 12
+  };
+
+  const getProjectDateValue = (p: Project) => {
+    const year = parseInt(p.yearCreated || "0", 10);
+    const month = monthOrder[(p.monthCreated || "").toLowerCase().trim()] || 0;
+    return year * 100 + month;
+  };
+
+  const sortedProjects = [...(projects || [])].sort((a, b) => getProjectDateValue(b) - getProjectDateValue(a));
+
   const filteredProjects: Project[] =
     activeCategory === "all"
-      ? projects
-      : projects.filter((project: Project) =>
+      ? sortedProjects
+      : sortedProjects.filter((project: Project) =>
           project.category.includes(activeCategory)
         );
 
@@ -116,9 +130,16 @@ export default function PortfolioPage() {
                     </div>
                     {/* Info */}
                     <div className="p-6">
-                      <h3 className="text-base font-bold text-charcoal group-hover:text-charcoal transition-colors line-clamp-1">
-                        {project.title}
-                      </h3>
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <h3 className="text-base font-bold text-charcoal group-hover:text-charcoal transition-colors line-clamp-1">
+                          {project.title}
+                        </h3>
+                        {(project.monthCreated || project.yearCreated) && (
+                          <span className="text-[10px] font-mono text-charcoal-muted flex-shrink-0 bg-cream border border-cream-border px-2 py-0.5 rounded">
+                            {project.monthCreated || ""} {project.yearCreated || ""}
+                          </span>
+                        )}
+                      </div>
                       <p className="text-charcoal-muted text-xs sm:text-sm mt-2 line-clamp-2 leading-relaxed">
                         {project.description}
                       </p>

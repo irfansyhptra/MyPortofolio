@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { SiteData } from "@/app/data/siteDataManager";
-import siteDataJson from "@/app/data/siteData.json";
+import { defaultSiteData } from "@/app/data/defaultSiteData";
 
 interface DataContextType {
   data: SiteData;
@@ -9,7 +9,7 @@ interface DataContextType {
 }
 
 const DataContext = createContext<DataContextType>({
-  data: siteDataJson as SiteData,
+  data: defaultSiteData,
   loading: false,
 });
 
@@ -18,7 +18,7 @@ export function useData() {
 }
 
 export function DataProvider({ children }: { children: React.ReactNode }) {
-  const [data, setData] = useState<SiteData>(siteDataJson as SiteData);
+  const [data, setData] = useState<SiteData>(defaultSiteData);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

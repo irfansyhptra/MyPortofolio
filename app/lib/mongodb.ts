@@ -31,5 +31,5 @@ export async function getDb(): Promise<Db> {
     throw new Error("MONGODB_URI is not defined in environment variables");
   }
   const connection = await clientPromise;
-  return connection.db();
+  return connection.db("portfolio");
 }

@@ -1,49 +1,6 @@
-const { MongoClient } = require("mongodb");
-const fs = require("fs");
-const path = require("path");
+import { SiteData } from "./siteDataManager";
 
-// 1. Parse .env file line by line to extract variables robustly
-function parseEnv() {
-  const envPath = path.join(__dirname, "..", ".env");
-  const config = {};
-  if (fs.existsSync(envPath)) {
-    const content = fs.readFileSync(envPath, "utf8");
-    const lines = content.split(/\r?\n/);
-    for (const line of lines) {
-      const trimmed = line.trim();
-      // Skip empty lines and comments
-      if (!trimmed || trimmed.startsWith("#")) continue;
-      
-      const equalIndex = trimmed.indexOf("=");
-      if (equalIndex > 0) {
-        const key = trimmed.slice(0, equalIndex).trim();
-        let val = trimmed.slice(equalIndex + 1).trim();
-        
-        // Remove wrapping quotes if present
-        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-          val = val.slice(1, -1).trim();
-        }
-        config[key] = val;
-      }
-    }
-  }
-  return config;
-}
-
-const env = parseEnv();
-const uri = process.env.MONGODB_URI || env.MONGODB_URI;
-
-if (!uri) {
-  console.error("❌ MONGODB_URI not found in process environment or .env file!");
-  process.exit(1);
-}
-
-// Mask connection string for security logging
-const maskedUri = uri.replace(/:([^:@]+)@/, ":******@");
-console.log(`🔌 Database connection URI: ${maskedUri}`);
-
-// Built-in seed data (completely independent of local siteData.json)
-const seedData = {
+export const defaultSiteData: SiteData = {
   profile: {
     name: "Irfan Syahputra",
     role: "Full Stack Developer",
@@ -75,24 +32,88 @@ const seedData = {
     ]
   },
   stats: [
-    { value: 50, label: "Projects Completed", suffix: "+" },
-    { value: 95, label: "Client Satisfaction", suffix: "%" },
-    { value: 5, label: "Years Experience", suffix: "+" },
-    { value: 100, label: "Code Reviews", suffix: "+" }
+    {
+      value: 50,
+      label: "Projects Completed",
+      suffix: "+"
+    },
+    {
+      value: 95,
+      label: "Client Satisfaction",
+      suffix: "%"
+    },
+    {
+      value: 5,
+      label: "Years Experience",
+      suffix: "+"
+    },
+    {
+      value: 100,
+      label: "Code Reviews",
+      suffix: "+"
+    }
   ],
   skills: [
-    { name: "HTML5 & CSS3", level: 95, category: "Frontend" },
-    { name: "JavaScript (ES6+)", level: 90, category: "Frontend" },
-    { name: "React.js", level: 92, category: "Frontend" },
-    { name: "Next.js", level: 85, category: "Frontend" },
-    { name: "TypeScript", level: 80, category: "Frontend" },
-    { name: "Tailwind CSS", level: 88, category: "Frontend" },
-    { name: "Node.js", level: 78, category: "Backend" },
-    { name: "MongoDB", level: 70, category: "Backend" },
-    { name: "Git & GitHub", level: 85, category: "Tools" },
-    { name: "GraphQL", level: 75, category: "Backend" },
-    { name: "Redux", level: 82, category: "Frontend" },
-    { name: "Firebase", level: 70, category: "Backend" }
+    {
+      name: "HTML5 & CSS3",
+      level: 95,
+      category: "Frontend"
+    },
+    {
+      name: "JavaScript (ES6+)",
+      level: 90,
+      category: "Frontend"
+    },
+    {
+      name: "React.js",
+      level: 92,
+      category: "Frontend"
+    },
+    {
+      name: "Next.js",
+      level: 85,
+      category: "Frontend"
+    },
+    {
+      name: "TypeScript",
+      level: 80,
+      category: "Frontend"
+    },
+    {
+      name: "Tailwind CSS",
+      level: 88,
+      category: "Frontend"
+    },
+    {
+      name: "Node.js",
+      level: 78,
+      category: "Backend"
+    },
+    {
+      name: "MongoDB",
+      level: 70,
+      category: "Backend"
+    },
+    {
+      name: "Git & GitHub",
+      level: 85,
+      category: "Tools"
+    },
+    {
+      name: "GraphQL",
+      level: 75,
+      category: "Backend"
+    },
+    {
+      name: "Redux",
+      level: 82,
+      category: "Frontend"
+    },
+    {
+      name: "Firebase",
+      level: 70,
+      category: "Backend"
+    }
   ],
   experiences: [
     {
@@ -111,16 +132,51 @@ const seedData = {
     }
   ],
   services: [
-    { id: 1, title: "Web Development", description: "Membuat website modern dan responsif dengan teknologi terkini untuk meningkatkan presence digital bisnis Anda.", icon: "💻" },
-    { id: 2, title: "Frontend Development", description: "Membangun antarmuka pengguna yang menarik dan interaktif dengan fokus pada pengalaman pengguna yang optimal.", icon: "🎨" },
-    { id: 3, title: "Backend Development", description: "Mengembangkan sistem backend yang handal dan scalable untuk mendukung aplikasi web Anda.", icon: "⚙️" }
+    {
+      id: 1,
+      title: "Web Development",
+      description: "Membuat website modern dan responsif dengan teknologi terkini untuk meningkatkan presence digital bisnis Anda.",
+      icon: "💻"
+    },
+    {
+      id: 2,
+      title: "Frontend Development",
+      description: "Membangun antarmuka pengguna yang menarik dan interaktif dengan fokus pada pengalaman pengguna yang optimal.",
+      icon: "🎨"
+    },
+    {
+      id: 3,
+      title: "Backend Development",
+      description: "Mengembangkan sistem backend yang handal dan scalable untuk mendukung aplikasi web Anda.",
+      icon: "⚙️"
+    }
   ],
   workProcess: [
-    { step: 1, title: "Discovery & Konsultasi", description: "Memahami kebutuhan, tujuan, dan ekspektasi Anda melalui diskusi mendalam." },
-    { step: 2, title: "Perencanaan & Desain", description: "Menyusun rencana proyek, membuat wireframe, dan merancang UI/UX yang intuitif." },
-    { step: 3, title: "Pengembangan", description: "Mengimplementasikan desain menjadi kode dengan teknologi modern dan standar kualitas tinggi." },
-    { step: 4, title: "Testing & Revisi", description: "Melakukan pengujian komprehensif untuk memastikan semua berfungsi dengan baik dan sesuai." },
-    { step: 5, title: "Deployment & Support", description: "Meluncurkan proyek dan memberikan dukungan paska-peluncuran untuk pemeliharaan." }
+    {
+      step: 1,
+      title: "Discovery & Konsultasi",
+      description: "Memahami kebutuhan, tujuan, dan ekspektasi Anda melalui diskusi mendalam."
+    },
+    {
+      step: 2,
+      title: "Perencanaan & Desain",
+      description: "Menyusun rencana proyek, membuat wireframe, dan merancang UI/UX yang intuitif."
+    },
+    {
+      step: 3,
+      title: "Pengembangan",
+      description: "Mengimplementasikan desain menjadi kode dengan teknologi modern dan standar kualitas tinggi."
+    },
+    {
+      step: 4,
+      title: "Testing & Revisi",
+      description: "Melakukan pengujian komprehensif untuk memastikan semua berfungsi dengan baik dan sesuai."
+    },
+    {
+      step: 5,
+      title: "Deployment & Support",
+      description: "Meluncurkan proyek dan memberikan dukungan paska-peluncuran untuk pemeliharaan."
+    }
   ],
   projects: [
     {
@@ -129,8 +185,12 @@ const seedData = {
       description: "Split Math is a web-based learning platform specifically designed to help students, particularly elementary school students, understand the concept of fractions in mathematics easily and enjoyably. This website transforms conventional, often theoretical, learning methods into a colorful, interactive, and visual experience, making complex material easier to digest.",
       image: "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781455402/portfolio/projects/kr8ddzzglchfockdwsoo.png",
       link: "https://split-math-v5.vercel.app/",
-      category: ["Education Web"],
-      technologies: ["HTML"],
+      category: [
+        "Education Web"
+      ],
+      technologies: [
+        "HTML"
+      ],
       featured: false,
       monthCreated: "Desember",
       yearCreated: "2024",
@@ -142,8 +202,12 @@ const seedData = {
       description: "Eventory is a front-end web application that functions as a complete and interactive event management system. The platform is designed to connect event organizers with attendees, providing a suite of features for creating, discovering, joining, and managing various types of events. The application has two main roles: Users, who can create and participate in events, and Administrators.",
       image: "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781456513/portfolio/projects/tofuh0w9ygerefcchgyw.png",
       link: "https://eventoryy.vercel.app/",
-      category: ["Web"],
-      technologies: ["React"],
+      category: [
+        "Web"
+      ],
+      technologies: [
+        "React"
+      ],
       featured: false,
       monthCreated: "Maret",
       yearCreated: "2025",
@@ -155,8 +219,18 @@ const seedData = {
       description: "The Teacher Attendance System is a web-based dashboard application designed specifically for teachers at SMK N 3 Kejuruan Muda. Its primary purpose is to modernize and simplify the process of recording attendance, managing teaching schedules, and digitally monitoring absence history. With a clean and interactive interface, the system provides all the information and tools teachers need in one centralized platform.",
       image: "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781459625/portfolio/projects/o3z1zbsedwgwjzliid9n.png",
       link: "",
-      category: ["School System", "Web Dev"],
-      technologies: ["HTML", "Java Script", "CSS", "Tailwind", "MonggoDB", "Express.js"],
+      category: [
+        "School System",
+        "Web Dev"
+      ],
+      technologies: [
+        "HTML",
+        "Java Script",
+        "CSS",
+        "Tailwind",
+        "MonggoDB",
+        "Express.js"
+      ],
       featured: false,
       monthCreated: "Oktober",
       yearCreated: "2024",
@@ -168,8 +242,18 @@ const seedData = {
       description: "SILAPOR is a web application platform that functions as an Online Complaints Information System for Banda Aceh City residents. This project is designed to bridge communication between the community and the city government, providing an efficient, transparent, and structured means for residents to report various issues or problems encountered in their environment.",
       image: "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781459808/portfolio/projects/tksfjwxub09yjrau7nvg.png",
       link: "https://silapor.vercel.app/",
-      category: ["Web Development"],
-      technologies: ["HTML", "Java Script", "CSS", "Tailwind", "MonggoDB", "cloudinary", "Express.js"],
+      category: [
+        "Web Development"
+      ],
+      technologies: [
+        "HTML",
+        "Java Script",
+        "CSS",
+        "Tailwind",
+        "MonggoDB",
+        "cloudinary",
+        "Express.js"
+      ],
       featured: false,
       monthCreated: "Januari",
       yearCreated: "2025",
@@ -181,8 +265,18 @@ const seedData = {
       description: "This project is a modern web platform built as a profile site and information system for the Pancasila and Citizenship Education Student Association (HIMAPRODI PPKn) at Syiah Kuala University. As the digital face of the organization, it provides comprehensive information on the association's profile, management structure, work programs, and activity agenda to students and the public.",
       image: "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781459975/portfolio/projects/kktvkyf7xkzowb9kz2n0.png",
       link: "https://himadikwara-usk.my.id/",
-      category: ["Web Development"],
-      technologies: ["HTML", "Tailwind CSS", "Express.js", "React.js", "MonggoDB", "Supabase", "Java Script"],
+      category: [
+        "Web Development"
+      ],
+      technologies: [
+        "HTML",
+        "Tailwind CSS",
+        "Express.js",
+        "React.js",
+        "MonggoDB",
+        "Supabase",
+        "Java Script"
+      ],
       featured: false,
       monthCreated: "September",
       yearCreated: "2024",
@@ -194,8 +288,16 @@ const seedData = {
       description: "FreshChain: Sistem Distribusi Pangan\nLokal untuk Mengurangi Food Loss dalam Mendukung Sustainable Food\nSystem ,Solusi End-to-End Crowdfunding dan Marketplace Pertanian",
       image: "https://res.cloudinary.com/dpjwfljvc/image/upload/v1781460340/portfolio/projects/xhdpt7c6oxdzmjqrtlf0.jpg",
       link: "https://freshchain.vercel.app/",
-      category: ["Web Dev", "Crowdfunding", "Marketplace"],
-      technologies: ["Next.js", "MonggoDB", "Cloudenary"],
+      category: [
+        "Web Dev",
+        "Crowdfunding",
+        "Marketplace"
+      ],
+      technologies: [
+        "Next.js",
+        "MonggoDB",
+        "Cloudenary"
+      ],
       featured: false,
       monthCreated: "Februari",
       yearCreated: "2025",
@@ -238,36 +340,3 @@ const seedData = {
     }
   ]
 };
-
-async function seed() {
-  const client = new MongoClient(uri);
-  try {
-    console.log("🔗 Connecting to MongoDB...");
-    await client.connect();
-    console.log("✅ Connected successfully!");
-
-    const db = client.db("portfolio");
-    console.log(`📂 Using database: "${db.databaseName}"`);
-    
-    const collection = db.collection("site_data");
-
-    console.log("🗑️ Cleaning up old site data from DB...");
-    await collection.deleteOne({ _id: "site_data_main" });
-
-    console.log("🚀 Seeding new site data to MongoDB...");
-    const result = await collection.insertOne({
-      _id: "site_data_main",
-      ...seedData
-    });
-
-    console.log("🎉 Database successfully seeded!");
-    console.log(`Inserted ID: ${result.insertedId}`);
-  } catch (err) {
-    console.error("❌ Seeding database error:", err);
-  } finally {
-    await client.close();
-    console.log("🔌 MongoDB connection closed.");
-  }
-}
-
-seed();

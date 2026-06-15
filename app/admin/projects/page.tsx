@@ -14,6 +14,9 @@ const emptyProject: ProjectItem = {
   category: [],
   technologies: [],
   featured: false,
+  monthCreated: "",
+  yearCreated: "",
+  testimonial: "",
 };
 
 export default function AdminProjects() {
@@ -100,6 +103,11 @@ export default function AdminProjects() {
             </div>
             <Input label="Categories (comma separated)" value={catRaw} onChange={(e) => setCatRaw(e.target.value)} placeholder="Web Development, E-Commerce" />
             <Input label="Technologies (comma separated)" value={techRaw} onChange={(e) => setTechRaw(e.target.value)} placeholder="React, Node.js, MongoDB" />
+            <Input label="Month Created" value={editing.monthCreated || ""} onChange={(e) => setEditing({ ...editing, monthCreated: e.target.value })} placeholder="Desember" />
+            <Input label="Year Created" value={editing.yearCreated || ""} onChange={(e) => setEditing({ ...editing, yearCreated: e.target.value })} placeholder="2025" />
+            <div className="lg:col-span-2">
+              <TextArea label="Testimonial" value={editing.testimonial || ""} rows={3} onChange={(e) => setEditing({ ...editing, testimonial: e.target.value })} placeholder="Client testimonial / feedback for this project (optional)" />
+            </div>
             <div>
               <label className="block text-sm font-medium text-white/60 mb-1.5">Image</label>
               <input type="file" accept="image/*" onChange={handleImageUpload} className="text-sm text-white/50 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:bg-white/10 file:text-white/70" />

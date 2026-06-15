@@ -1,5 +1,4 @@
-import fs from "fs";
-import path from "path";
+import { defaultSiteData } from "./defaultSiteData";
 
 // ─── Types ───────────────────────────────────────────
 export interface SiteProfile {
@@ -71,6 +70,9 @@ export interface ProjectItem {
   category: string[];
   technologies: string[];
   featured?: boolean;
+  monthCreated?: string;
+  yearCreated?: string;
+  testimonial?: string;
 }
 
 export interface TestimonialItem {
@@ -105,34 +107,26 @@ export interface SiteData {
   blogPosts: BlogPostItem[];
 }
 
-// ─── File path ───────────────────────────────────────
-const DATA_FILE = path.join(process.cwd(), "app", "data", "siteData.json");
-
 // ─── Read ────────────────────────────────────────────
 export function getSiteData(): SiteData {
-  try {
-    const raw = fs.readFileSync(DATA_FILE, "utf-8");
-    return JSON.parse(raw) as SiteData;
-  } catch {
-    throw new Error("Failed to read siteData.json");
-  }
+  return defaultSiteData;
 }
 
 // ─── Write ───────────────────────────────────────────
+// This is now a no-op since we write only to MongoDB
 export function writeSiteData(data: SiteData): void {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), "utf-8");
+  console.log("writeSiteData called (no-op as we write only to MongoDB)");
 }
 
 // ─── Section helpers ─────────────────────────────────
 export function getSection<K extends keyof SiteData>(key: K): SiteData[K] {
-  return getSiteData()[key];
+  return defaultSiteData[key];
 }
 
+// This is now a no-op since updates go through MongoDB
 export function updateSection<K extends keyof SiteData>(
   key: K,
   value: SiteData[K]
 ): void {
-  const data = getSiteData();
-  data[key] = value;
-  writeSiteData(data);
+  console.log(`updateSection called for ${key} (no-op as we update only in MongoDB)`);
 }

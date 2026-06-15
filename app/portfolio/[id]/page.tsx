@@ -75,6 +75,16 @@ export default async function PortfolioDetailPage({
             </p>
           </div>
 
+          {/* Testimonial block */}
+          {project.testimonial && (
+            <div className="card-minimal p-8 sm:p-10 border-cream-border bg-cream/30">
+              <h2 className="text-xl font-bold text-charcoal mb-4">Testimoni Klien</h2>
+              <blockquote className="relative p-5 border-l-4 border-charcoal bg-cream rounded-r-lg italic text-charcoal-muted text-sm sm:text-base leading-relaxed">
+                "{project.testimonial}"
+              </blockquote>
+            </div>
+          )}
+
         </div>
 
         {/* Sidebar Info Column (Right - 1 col) */}
@@ -116,6 +126,18 @@ export default async function PortfolioDetailPage({
                 ))}
               </div>
             </div>
+
+            {/* Waktu Pembuatan */}
+            {(project.monthCreated || project.yearCreated) && (
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-charcoal-muted mb-3 font-mono flex items-center gap-1.5">
+                  📅 Waktu Pembuatan
+                </h3>
+                <p className="text-sm font-medium text-charcoal font-sans">
+                  {project.monthCreated || ""} {project.yearCreated || ""}
+                </p>
+              </div>
+            )}
 
             {/* Action Buttons */}
             <div className="pt-6 border-t border-cream-border flex flex-col gap-3">
