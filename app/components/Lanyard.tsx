@@ -42,12 +42,138 @@ export default function Lanyard({
   transparent = true,
 }: LanyardProps) {
   return (
-    <div className="relative z-0 w-full h-full flex justify-center items-center transform scale-100 origin-center">
+    <div className="relative z-0 w-full h-full flex justify-center items-center transform scale-100 origin-center" style={{ background: "#0a0a0f" }}>
+
+      {/* ── Layer 0: Starfield dot grid ── */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+          opacity: 0.6,
+        }}
+      />
+
+      {/* ── Layer 1: Aurora gradient orbs ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Top-left violet orb */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: "340px",
+            height: "340px",
+            top: "-60px",
+            left: "-80px",
+            background:
+              "radial-gradient(circle, rgba(124,58,237,0.55) 0%, transparent 70%)",
+            filter: "blur(48px)",
+            animation: "orbFloat1 9s ease-in-out infinite alternate",
+          }}
+        />
+        {/* Bottom-right indigo orb */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: "300px",
+            height: "300px",
+            bottom: "-40px",
+            right: "-60px",
+            background:
+              "radial-gradient(circle, rgba(59,130,246,0.5) 0%, transparent 70%)",
+            filter: "blur(52px)",
+            animation: "orbFloat2 11s ease-in-out infinite alternate",
+          }}
+        />
+        {/* Center-top teal accent orb */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: "200px",
+            height: "200px",
+            top: "30%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background:
+              "radial-gradient(circle, rgba(45,212,191,0.35) 0%, transparent 70%)",
+            filter: "blur(40px)",
+            animation: "orbFloat3 13s ease-in-out infinite alternate",
+          }}
+        />
+        {/* Bottom-left pink micro orb */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: "180px",
+            height: "180px",
+            bottom: "20%",
+            left: "5%",
+            background:
+              "radial-gradient(circle, rgba(236,72,153,0.3) 0%, transparent 70%)",
+            filter: "blur(36px)",
+            animation: "orbFloat4 8s ease-in-out infinite alternate",
+          }}
+        />
+      </div>
+
+      {/* ── Layer 2: Concentric pulse rings ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
+        {[1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className="absolute rounded-full border"
+            style={{
+              width: `${i * 130}px`,
+              height: `${i * 130}px`,
+              borderColor: `rgba(124,58,237,${0.15 - i * 0.03})`,
+              animation: `pulseRing ${3 + i}s ease-in-out ${i * 0.7}s infinite`,
+              opacity: 0,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* ── Keyframe styles injected ── */}
+      <style>{`
+        @keyframes orbFloat1 {
+          0%   { transform: translate(0px,  0px)  scale(1);   }
+          100% { transform: translate(30px, 40px) scale(1.12); }
+        }
+        @keyframes orbFloat2 {
+          0%   { transform: translate(0px,  0px)  scale(1);    }
+          100% { transform: translate(-35px, -30px) scale(1.1); }
+        }
+        @keyframes orbFloat3 {
+          0%   { transform: translateX(-50%) translateY(0px)  scale(1);   }
+          100% { transform: translateX(-50%) translateY(25px) scale(1.08); }
+        }
+        @keyframes orbFloat4 {
+          0%   { transform: translate(0px,  0px)  scale(1);   }
+          100% { transform: translate(20px, -25px) scale(1.1); }
+        }
+        @keyframes pulseRing {
+          0%   { transform: scale(0.85); opacity: 0;    }
+          40%  { opacity: 1; }
+          100% { transform: scale(1.6);  opacity: 0;    }
+        }
+      `}</style>
+
+      {/* ── Layer 3: Vignette overlay ── */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(10,10,15,0.75) 100%)",
+        }}
+      />
+
+      {/* ── Layer 4: Three.js Canvas (lanyard) ── */}
       <Canvas
+        className="absolute inset-0 z-[2]"
         camera={{ position, fov }}
         gl={{ alpha: transparent }}
         onCreated={({ gl }) =>
-          gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
+          gl.setClearColor(new THREE.Color(0x000000), 0)
         }
       >
         <ambientLight intensity={Math.PI} />

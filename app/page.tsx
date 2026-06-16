@@ -95,7 +95,7 @@ import LogoLoop from "@/app/components/LogoLoop";
 import { useData } from "@/app/components/DataContext";
 import BgmPlayerWidget from "@/app/components/BgmPlayerWidget";
 import BgmLyricsWidget from "@/app/components/BgmLyricsWidget";
-import { Spotlight } from "@/app/components/Spotlight";
+import TestimonialsSection from "@/app/components/TestimonialsSection";
 
 const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
@@ -247,14 +247,8 @@ export default function Home() {
         </div>
 
         {/* Box 2: Interactive 3D Lanyard */}
-        <div className="lg:col-span-1 card-minimal overflow-hidden relative min-h-[450px] bg-cream-light p-0">
-          <Spotlight
-            className="left-[50%] top-[30%]"
-            fill="rgba(28, 28, 28, 0.6)"
-          />
-          <div className="absolute inset-0 z-10">
-            <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />
-          </div>
+        <div className="lg:col-span-1 card-minimal overflow-hidden relative min-h-[450px] p-0">
+          <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />
         </div>
 
         {/* Box 3: Background Music Player */}
@@ -379,43 +373,7 @@ export default function Home() {
         </div>
 
         {/* Box 6: Bento Testimonials list */}
-        {testimonials && testimonials.length > 0 && (
-          <div className="lg:col-span-3 card-minimal p-8 sm:p-12">
-            <div className="mb-10">
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-charcoal">Testimoni</h3>
-              <p className="text-charcoal-muted text-sm mt-1 leading-relaxed">
-                Apa pendapat mereka setelah mempercayakan proyeknya kepada saya.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {testimonials.map((t, idx) => (
-                <div 
-                  key={t.id || idx} 
-                  className="flex flex-col justify-between p-8 bg-cream rounded-xl border border-cream-border relative hover:border-charcoal-border hover:shadow-sm transition-all duration-300"
-                >
-                  <span className="text-6xl text-charcoal/5 font-serif absolute top-2 left-4 select-none pointer-events-none">“</span>
-                  <p className="text-charcoal-muted text-sm italic relative z-10 mb-8 mt-6 leading-relaxed">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-3 mt-auto pt-4 border-t border-cream-border/60">
-                    {t.avatar && (
-                      <img
-                        src={t.avatar}
-                        alt={t.name}
-                        className="w-10 h-10 rounded-full object-cover border border-cream-border"
-                      />
-                    )}
-                    <div>
-                      <h4 className="text-sm font-bold text-charcoal">{t.name}</h4>
-                      <p className="text-[11px] font-mono text-charcoal-muted">{t.position}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <TestimonialsSection />
 
       </div>
     </div>

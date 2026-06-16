@@ -13,6 +13,18 @@ const nextConfig = {
     };
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: "/api/testimonials/:path*",
+        destination: "http://localhost:5000/api/testimonials/:path*",
+      },
+      {
+        source: "/api/admin/testimonials/:path*",
+        destination: "http://localhost:5000/api/admin/testimonials/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
